@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Your deliverable — Autonomous Operating Center</title>
+<style>html,body{margin:0;height:100%;background:#0b0d12;color:#e9ecf1;font:16px/1.6 system-ui,sans-serif}#m{display:grid;place-items:center;height:100%;text-align:center;padding:20px}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;background:#fff}</style>
+</head>
+<body>
+<div id="m"><div><h1>Loading your deliverable…</h1><p style="color:#9aa3b2">One moment.</p></div></div>
+<script>
+const id=new URLSearchParams(location.search).get("order");
+const SB="https://fnnecltfowhcocitarln.supabase.co/functions/v1";
+if(!id){document.getElementById("m").innerHTML="<h1>Missing order id</h1>";}
+else{
+  fetch(SB+"/page?order="+id).then(r=>r.text()).then(html=>{
+    // The delivered HTML is served as text/plain; render it properly in an iframe.
+    const f=document.createElement("iframe");
+    f.setAttribute("sandbox","allow-same-origin allow-popups allow-forms");
+    f.srcdoc=html;
+    document.body.innerHTML="";document.body.appendChild(f);
+  }).catch(e=>{document.getElementById("m").innerHTML="<h1>Couldn't load</h1><p>"+e.message+"</p>";});
+}
+</script>
+</body>
+</html>
