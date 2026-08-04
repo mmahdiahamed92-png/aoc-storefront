@@ -55,6 +55,8 @@ const SERVICES=[
  {sku:"seo-audit",title:"AI SEO audit",price:79,desc:"A prioritised, actionable audit of your site with concrete fixes."},
  {sku:"logo-pack",title:"Logo & brand pack",price:69,desc:"Logo concepts, colour palette and font pairing for your brand."},
  {sku:"copy-pack",title:"Marketing copy pack",price:59,desc:"Headlines, value props, an email and ad variations that sell."},
+ {sku:"website-3",title:"3-page website",price:399,desc:"A complete multi-page site — home, services & contact — designed and built in a premium bespoke style."},
+ {sku:"website-5",title:"5-page website",price:699,desc:"A full 5-page website with gallery, pricing and more, generated end to end."},
 ];
 const grid=document.getElementById("grid");
 grid.innerHTML=SERVICES.map(s=>`<div class="card" data-sku="${s.sku}"><h3>${s.title}</h3><p>${s.desc}</p><div class="price">£${s.price} <small>one-off · card</small></div><div class="pick">Order now →</div></div>`).join("");
