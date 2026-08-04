@@ -1,0 +1,196 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Nimbus</title><meta name="description" content="Nimbus uses AI to automatically break down goals, assign tasks to the right people, and track everything to completion — so your distributed team ships faster without the standup fatigue.">
+<style>
+:root{--accent:#5B5BF6;--bg:#0a0c11;--panel:#12151d;--tile:rgba(255,255,255,.04);--line:rgba(255,255,255,.09);--text:#eef1f6;--muted:#9aa3b2;--radius:20px;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.bwrap{max-width:1180px;margin:0 auto;padding:0 24px}.bwrap.narrow{max-width:820px}
+.bkick{display:inline-block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+.bhead{margin-bottom:44px}.bhead.center{text-align:center}
+.bhead h2{font-size:clamp(28px,4.4vw,46px);letter-spacing:-.02em;line-height:1.08}
+.bsection{padding:96px 0}
+.bbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 24px;border-radius:12px;font-weight:600;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s;border:1px solid transparent;cursor:pointer}
+.bbtn.solid{background:var(--accent);color:#0a0c11;box-shadow:0 10px 30px -8px var(--accent)}
+.bbtn.solid:hover{transform:translateY(-2px)}
+.bbtn.ghost{background:var(--tile);border-color:var(--line);color:var(--text)}
+.bbtn.ghost:hover{border-color:var(--accent)}
+
+.bnav{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:18px 24px;transition:background .3s,box-shadow .3s,padding .3s}
+.bnav.is-stuck{background:rgba(10,12,17,.75);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--line);padding:12px 24px}
+.bbrand{font-weight:800;font-size:19px;letter-spacing:-.02em}
+.bbrand:before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--accent);margin-right:9px;box-shadow:0 0 14px var(--accent);vertical-align:middle}
+.blinks{display:flex;gap:26px;align-items:center}
+.blinks a{font-size:14px;color:var(--muted)}.blinks a:hover{color:var(--text)}
+.bburger{display:none;background:none;border:0;color:var(--text);font-size:22px;cursor:pointer}
+
+.bhero{position:relative;padding:140px 0 70px;overflow:hidden}
+.bhero:before{content:"";position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(closest-side,var(--accent),transparent);opacity:.16;filter:blur(30px);pointer-events:none}
+.bento-hero{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-auto-rows:150px;gap:16px}
+.bh-main{grid-column:span 2;grid-row:span 2;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:38px;display:flex;flex-direction:column;justify-content:center}
+.bh-main h1{font-size:clamp(34px,5vw,58px);letter-spacing:-.03em;line-height:1.02;margin-bottom:18px}
+.bh-main p{color:var(--muted);font-size:18px;max-width:44ch;margin-bottom:26px}
+.bh-cta{display:flex;gap:12px;flex-wrap:wrap}
+.bh-img{grid-column:span 1;grid-row:span 2;border-radius:var(--radius);background-size:cover;background-position:center;border:1px solid var(--line);min-height:150px}
+.bh-tile{background:var(--tile);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;justify-content:center}
+.bh-tile .bstat-num{font-size:34px;font-weight:800;color:var(--accent);letter-spacing:-.02em}
+.bh-tile span.l{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.bh-accent{background:linear-gradient(135deg,var(--accent),#0a0c11);border:1px solid var(--line);border-radius:var(--radius);padding:22px;display:flex;align-items:flex-end;font-weight:700;color:#0a0c11}
+
+.bmarquee{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;margin-top:26px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.bmarquee-track{display:inline-flex;gap:22px;white-space:nowrap;animation:bmarq 32s linear infinite;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.bmarquee-track i{color:var(--accent);font-style:normal}
+@keyframes bmarq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.bento-feats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.btile{background:var(--tile);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:border-color .25s,transform .25s}
+.btile:hover{border-color:var(--accent);transform:translateY(-3px)}
+.btile-lg{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column}
+.btile-img{height:150px;background-size:cover;background-position:center}
+.btile-lg .btile-img{flex:1;min-height:200px}
+.btile-body{padding:22px}
+.btile-body h3{font-size:18px;margin-bottom:8px;letter-spacing:-.01em}
+.btile-body p{color:var(--muted);font-size:14.5px}
+
+.bstats{padding:40px 0;background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.bstats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.bstat-num{font-size:clamp(30px,4vw,46px);font-weight:800;color:var(--accent);letter-spacing:-.02em}
+.bstat-label{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+
+.bhow .btabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:34px}
+.btab{background:var(--tile);border:1px solid var(--line);color:var(--muted);padding:11px 20px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;transition:.2s}
+.btab.active{background:var(--accent);color:#0a0c11;border-color:var(--accent)}
+.bpanel{display:none}.bpanel.active{display:block;animation:bfade .4s ease}
+.bpanel-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:36px}
+.bpanel-copy h3{font-size:26px;margin-bottom:12px;letter-spacing:-.01em}
+.bpanel-copy p{color:var(--muted);margin-bottom:18px}
+.bpanel-copy ul{list-style:none;display:grid;gap:12px}
+.bpanel-copy li{font-size:14.5px;color:var(--muted);padding-left:24px;position:relative}
+.bpanel-copy li:before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+.bpanel-copy strong{color:var(--text)}
+.bpanel-img{aspect-ratio:4/3;border-radius:14px;background-size:cover;background-position:center;border:1px solid var(--line)}
+
+.bprice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+.bprice{position:relative;background:var(--tile);border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;display:flex;flex-direction:column}
+.bprice.feat{border-color:var(--accent);box-shadow:0 0 40px -12px var(--accent)}
+.bbadge{position:absolute;top:-11px;left:28px;background:var(--accent);color:#0a0c11;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.bprice h3{font-size:19px;margin-bottom:10px}
+.bprice-fig{font-size:40px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.bprice-fig span{font-size:15px;color:var(--muted);font-weight:500}
+.bprice p{color:var(--muted);font-size:14px;margin-bottom:18px}
+.bprice ul{list-style:none;display:grid;gap:10px;margin-bottom:24px}
+.bprice li{font-size:14px;color:var(--muted);padding-left:22px;position:relative}
+.bprice li:before{content:"";position:absolute;left:0;top:6px;width:12px;height:7px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+.bprice .bbtn{margin-top:auto}
+
+.bquotes{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.bquote{background:var(--tile);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.bquote blockquote{font-size:16.5px;line-height:1.55;margin-bottom:18px}
+.bquote figcaption strong{display:block;font-size:14px}
+.bquote figcaption span{font-size:13px;color:var(--muted)}
+
+#faq details{border-top:1px solid var(--line);padding:6px 0}
+#faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;font-size:17px;display:flex;justify-content:space-between}
+#faq summary::-webkit-details-marker{display:none}
+#faq summary:after{content:"+";color:var(--accent);font-size:22px}
+#faq details[open] summary:after{content:"\2013"}
+#faq details>div{color:var(--muted);padding:0 0 18px;max-width:64ch;font-size:15px}
+
+.bcta{padding:100px 24px;text-align:center;position:relative;overflow:hidden}
+.bcta:before{content:"";position:absolute;inset:0;background:radial-gradient(closest-side,var(--accent),transparent);opacity:.14;filter:blur(30px)}
+.bcta-in{position:relative}
+.bcta h2{font-size:clamp(28px,4.6vw,50px);letter-spacing:-.02em;margin-bottom:16px}
+.bcta p{color:var(--muted);max-width:50ch;margin:0 auto 28px;font-size:18px}
+
+footer{border-top:1px solid var(--line);padding:44px 24px}
+.bfoot{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:18px;align-items:center;color:var(--muted);font-size:14px}
+
+[data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+[data-reveal].in{opacity:1;transform:none}
+@keyframes bfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:900px){
+  .bento-hero{grid-template-columns:1fr 1fr;grid-auto-rows:auto}
+  .bh-main{grid-column:span 2;grid-row:auto}.bh-img{grid-column:span 2;grid-row:auto;min-height:200px}
+  .bento-feats{grid-template-columns:1fr}.btile-lg{grid-column:span 1;grid-row:span 1}
+  .bstats-row{grid-template-columns:repeat(2,1fr);gap:28px}
+  .bpanel-grid{grid-template-columns:1fr}.bprice-grid{grid-template-columns:1fr}.bquotes{grid-template-columns:1fr}
+  .blinks{position:absolute;top:100%;right:24px;flex-direction:column;background:var(--panel);padding:16px 22px;border:1px solid var(--line);border-radius:14px;display:none}
+  .blinks.show{display:flex}.bburger{display:block}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+
+<nav class="bnav">
+  <a class="bbrand" href="#">Nimbus</a>
+  <div class="blinks">
+    <a href="#features">Features</a>
+    <a href="#how">How it works</a>
+    <a href="#pricing">Pricing</a>
+    <a class="bbtn solid" href="https://nimbus.example">Start free</a>
+  </div>
+  <button class="bburger" aria-label="Menu">&#9776;</button>
+</nav>
+
+<header class="bhero"><div class="bwrap">
+  <div class="bento-hero">
+    <div class="bh-main">
+      <span class="bkick">AI Project Intelligence for Remote Teams</span>
+      <h1>Let the work plan itself.</h1>
+      <p>Nimbus uses AI to automatically break down goals, assign tasks to the right people, and track everything to completion — so your distributed team ships faster without the standup fatigue.</p>
+      <div class="bh-cta"><a class="bbtn solid" href="https://nimbus.example">Start free</a><a class="bbtn ghost" href="#features">Watch the 2-min demo</a></div>
+    </div>
+    <div class="bh-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-h1.jpg')"></div>
+    <div class="bh-tile"><span class="bstat-num" data-target="11" data-suffix="hrs">0hrs</span><span class="l">Saved per teammate every week</span></div><div class="bh-tile"><span class="bstat-num" data-target="98" data-suffix="%">0%</span><span class="l">On-time delivery with auto-scheduling</span></div>
+  </div>
+  <div class="bmarquee"><div class="bmarquee-track"><span>Goal-to-task engine</span><i>&bull;</i><span>Smart capacity matching</span><i>&bull;</i><span>Live replanning</span><i>&bull;</i><span>Skill-aware routing</span><i>&bull;</i><span>Async briefs</span><i>&bull;</i><span>Workload guardrails</span><i>&bull;</i><span>Saved per teammate every week</span><i>&bull;</i><span>On-time delivery with auto-scheduling</span><i>&bull;</i><span>Remote teams running on Nimbus</span><i>&bull;</i><span>Average rating on G2 &amp; Capterra</span><i>&bull;</i><span>Goal-to-task engine</span><i>&bull;</i><span>Smart capacity matching</span><i>&bull;</i><span>Live replanning</span><i>&bull;</i><span>Skill-aware routing</span><i>&bull;</i><span>Async briefs</span><i>&bull;</i><span>Workload guardrails</span><i>&bull;</i><span>Saved per teammate every week</span><i>&bull;</i><span>On-time delivery with auto-scheduling</span><i>&bull;</i><span>Remote teams running on Nimbus</span><i>&bull;</i><span>Average rating on G2 &amp; Capterra</span><i>&bull;</i></div></div>
+</div></header>
+
+<section class="bsection" id="features" data-reveal><div class="bwrap">
+    <div class="bhead"><span class="bkick">How Nimbus Works</span><h2>From roadmap to done — without the busywork.</h2></div>
+    <div class="bento-feats"><div class="btile btile-lg"><div class="btile-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-h1.jpg')"></div><div class="btile-body"><h3>Goal-to-task engine</h3><p>Natural-language input becomes a structured, dependency-linked project plan in seconds.</p></div></div><div class="btile "><div class="btile-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-g1.jpg')"></div><div class="btile-body"><h3>Smart capacity matching</h3><p>Nimbus reads workloads, skills, and calendars so no one is overbooked or idle.</p></div></div><div class="btile "><div class="btile-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-g2.jpg')"></div><div class="btile-body"><h3>Live replanning</h3><p>Priorities shift and Nimbus re-sequences instantly — no manual Gantt dragging required.</p></div></div><div class="btile "><div class="btile-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-g3.jpg')"></div><div class="btile-body"><h3>Skill-aware routing</h3><p>Tasks go to the person best suited, not the person who happens to be online.</p></div></div><div class="btile "><div class="btile-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-g4.jpg')"></div><div class="btile-body"><h3>Async briefs</h3><p>Every assignment ships with context, linked files, and acceptance criteria built in.</p></div></div><div class="btile "><div class="btile-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-g5.jpg')"></div><div class="btile-body"><h3>Workload guardrails</h3><p>Nimbus flags burnout risk before it happens and suggests reallocations automatically.</p></div></div></div>
+  </div></section>
+<section class="bstats" data-reveal><div class="bwrap"><div class="bstats-row"><div class="bstat"><span class="bstat-num" data-target="11" data-suffix="hrs">0hrs</span><span class="bstat-label">Saved per teammate every week</span></div><div class="bstat"><span class="bstat-num" data-target="98" data-suffix="%">0%</span><span class="bstat-label">On-time delivery with auto-scheduling</span></div><div class="bstat"><span class="bstat-num" data-target="8" data-suffix="k+">0k+</span><span class="bstat-label">Remote teams running on Nimbus</span></div><div class="bstat"><span class="bstat-num" data-target="4.9" data-suffix="">0</span><span class="bstat-label">Average rating on G2 &amp; Capterra</span></div></div></div></section>
+<section class="bsection bhow" id="how" data-reveal><div class="bwrap">
+    <div class="bhead center"><span class="bkick">How it works</span><h2>Built for teams that measure success in shipped work, not meetings.</h2></div>
+    <div class="btabs"><button class="btab active">Auto-Plan</button><button class="btab">Auto-Assign</button><button class="btab">Auto-Track</button></div>
+    <div class="bpanel active"><div class="bpanel-grid"><div class="bpanel-copy"><h3>Describe the outcome. Nimbus builds the plan.</h3><p>Type a goal like &#39;Launch Q2 marketing site&#39; and Nimbus instantly generates a full task tree, estimates effort, sequences dependencies, and maps work to your team&#39;s capacity and time zones.</p><ul><li><strong>Goal-to-task engine</strong> Natural-language input becomes a structured, dependency-linked project plan in seconds.</li><li><strong>Smart capacity matching</strong> Nimbus reads workloads, skills, and calendars so no one is overbooked or idle.</li><li><strong>Live replanning</strong> Priorities shift and Nimbus re-sequences instantly — no manual Gantt dragging required.</li></ul></div><div class="bpanel-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-g0.jpg')"></div></div></div><div class="bpanel"><div class="bpanel-grid"><div class="bpanel-copy"><h3>The right work lands on the right desk.</h3><p>Nimbus assigns tasks based on each teammate&#39;s current bandwidth, skill match, and historical velocity — then nudges them with context-rich, async-ready briefs so nobody waits for a meeting to start.</p><ul><li><strong>Skill-aware routing</strong> Tasks go to the person best suited, not the person who happens to be online.</li><li><strong>Async briefs</strong> Every assignment ships with context, linked files, and acceptance criteria built in.</li><li><strong>Workload guardrails</strong> Nimbus flags burnout risk before it happens and suggests reallocations automatically.</li></ul></div><div class="bpanel-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-g1.jpg')"></div></div></div><div class="bpanel"><div class="bpanel-grid"><div class="bpanel-copy"><h3>Always know where things actually stand.</h3><p>No more chasing status updates. Nimbus monitors progress across tools, detects blockers, and rolls everything up into a real-time dashboard that tells you what&#39;s on track, what&#39;s slipping, and what needs your attention now.</p><ul><li><strong>Unified progress view</strong> Nimbus pulls signals from GitHub, Figma, Linear, and Slack into one living timeline.</li><li><strong>Blocker detection</strong> AI spots stalled tasks and stuck dependencies before they derail your sprint.</li><li><strong>Executive rollups</strong> Founders get a clean, auto-generated summary of milestones, risks, and velocity — refreshed continuously.</li></ul></div><div class="bpanel-img" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-nimbus-g2.jpg')"></div></div></div>
+  </div></section>
+<section class="bsection" id="pricing" data-reveal><div class="bwrap">
+    <div class="bhead center"><span class="bkick">Pricing</span><h2>Plans that scale from your first hire to your hundredth.</h2></div>
+    <div class="bprice-grid"><div class="bprice"><h3>Starter</h3><div class="bprice-fig">$0<span>free forever</span></div><p>For founders and small remote teams getting their first system in place.</p><ul><li>Up to 5 teammates</li><li>AI auto-planning for 3 active projects</li><li>Slack &amp; Google Workspace integrations</li></ul><a class="bbtn ghost" href="https://nimbus.example">Start free</a></div><div class="bprice feat"><span class="bbadge">Popular</span><h3>Team</h3><div class="bprice-fig">$14<span>per user / month</span></div><p>For growing remote teams that want full AI orchestration and live tracking.</p><ul><li>Unlimited teammates &amp; projects</li><li>Auto-assign with skill &amp; capacity matching</li><li>Real-time blocker detection &amp; executive rollups</li><li>GitHub, Figma, Linear &amp; Jira integrations</li></ul><a class="bbtn solid" href="https://nimbus.example">Start free</a></div><div class="bprice"><h3>Scale</h3><div class="bprice-fig">Custom<span>talk to us</span></div><p>For venture-backed teams and distributed orgs that need control, security, and support.</p><ul><li>SSO, SCIM &amp; advanced permissions</li><li>Custom AI models trained on your workflow</li><li>Dedicated success manager &amp; onboarding</li><li>SLA-backed uptime and priority support</li></ul><a class="bbtn ghost" href="https://nimbus.example">Start free</a></div></div>
+  </div></section>
+<section class="bsection" data-reveal><div class="bwrap">
+    <div class="bhead center"><span class="bkick">Loved by Remote Teams</span><h2>Founders and leads are shipping more with less overhead.</h2></div>
+    <div class="bquotes"><figure class="bquote"><blockquote>&ldquo;Nimbus replaced our project manager, our standups, and half our Slack channels. Our team ships like we&#39;re 20 people and we&#39;re only 8.&rdquo;</blockquote><figcaption><strong>Maya Okonkwo</strong><span>Co-founder &amp; CEO, Driftwave</span></figcaption></figure><figure class="bquote"><blockquote>&ldquo;I used to spend Mondays building sprint plans. Now I type one sentence and Nimbus does the rest. It&#39;s genuinely the first AI tool that earned a permanent spot in our stack.&rdquo;</blockquote><figcaption><strong>Lukas Brandt</strong><span>Head of Engineering, Pellet Labs</span></figcaption></figure><figure class="bquote"><blockquote>&ldquo;The auto-assignment is uncanny. It knows who&#39;s overloaded, who&#39;s underutilized, and routes work better than any human PM I&#39;ve worked with.&rdquo;</blockquote><figcaption><strong>Priya Raman</strong><span>Operations Lead, Northwind Studio</span></figcaption></figure></div>
+  </div></section>
+<section class="bsection" id="faq" data-reveal><div class="bwrap narrow">
+    <div class="bhead center"><span class="bkick">FAQ</span><h2>Questions, answered.</h2></div>
+    <details><summary>How does Nimbus know who should get which task?</summary><div>Nimbus builds a profile for each teammate based on their skills, past task history, current workload, and time zone. When a task is generated, it&#39;s routed to the best match automatically — and you can always override or adjust the rules.</div></details><details><summary>Does Nimbus work with the tools we already use?</summary><div>Yes. Nimbus integrates natively with GitHub, Linear, Jira, Figma, Slack, Google Workspace, and Notion. It pulls progress signals from all of them so your dashboard stays live without manual updates.</div></details><details><summary>Is our data used to train AI models?</summary><div>Never. Your project data, task content, and team communications are encrypted and isolated. We do not use customer data to train shared models. Scale plan customers can also deploy custom models trained exclusively on their environment.</div></details><details><summary>How long does it take to get set up?</summary><div>Most teams are fully onboarded in under 20 minutes. Connect your integrations, invite your team, describe your first goal in plain language, and Nimbus generates a complete plan immediately.</div></details>
+  </div></section>
+
+<section class="bcta"><div class="bcta-in bwrap narrow">
+  <h2>Your next project should plan itself.</h2>
+  <p>Join 8,000+ remote teams letting AI handle the orchestration so they can focus on the work that actually moves the needle. Free to start, no credit card required.</p>
+  <a class="bbtn solid" href="https://nimbus.example">Start free</a>
+</div></section>
+
+<footer><div class="bfoot"><span class="bbrand">Nimbus</span><span>Nimbus is the AI project intelligence layer for remote teams — auto-planning, auto-assigning, and auto-tracking work so you can ship faster with fewer meetings.</span><a href="mailto:hello@nimbus.example">hello@nimbus.example</a></div></footer>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav=document.querySelector('.bnav'); if(nav) window.addEventListener('scroll',function(){ nav.classList.toggle('is-stuck', window.scrollY>24); });
+  var tabs=[].slice.call(document.querySelectorAll('.btab')), panels=[].slice.call(document.querySelectorAll('.bpanel'));
+  tabs.forEach(function(t,i){ t.addEventListener('click',function(){ tabs.forEach(function(x){x.classList.remove('active');}); panels.forEach(function(p){p.classList.remove('active');}); t.classList.add('active'); if(panels[i])panels[i].classList.add('active'); }); });
+  var counters=[].slice.call(document.querySelectorAll('.bstat-num'));
+  var io=new IntersectionObserver(function(es){ es.forEach(function(e){ if(!e.isIntersecting)return; var el=e.target; io.unobserve(el); var target=parseFloat(el.getAttribute('data-target'))||0, suf=el.getAttribute('data-suffix')||'', dec=(String(target).indexOf('.')>-1)?1:0; if(reduce){el.textContent=target.toFixed(dec)+suf;return;} var s=null; function step(ts){ if(!s)s=ts; var p=Math.min((ts-s)/1400,1); el.textContent=(target*(0.5-Math.cos(Math.PI*p)/2)).toFixed(dec)+suf; if(p<1)requestAnimationFrame(step);} requestAnimationFrame(step); }); },{threshold:.5});
+  counters.forEach(function(c){ io.observe(c); });
+  var revs=[].slice.call(document.querySelectorAll('[data-reveal]'));
+  if(reduce)revs.forEach(function(r){r.classList.add('in');});
+  else{ var ro=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target);} }); },{threshold:.12}); revs.forEach(function(r){ro.observe(r);}); }
+  var burger=document.querySelector('.bburger'), links=document.querySelector('.blinks');
+  if(burger&&links)burger.addEventListener('click',function(){links.classList.toggle('show');});
+})();
+</script>
+</body></html>

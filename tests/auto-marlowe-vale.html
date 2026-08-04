@@ -1,0 +1,229 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Marlowe &amp; Vale</title><meta name="description" content="Marlowe &amp; Vale curates the most extraordinary waterfront estates, sky-touching penthouses, and architecturally significant residences — each one a singular expression of light, form, and place.">
+<style>
+:root{--accent:#B08D57;--ink:#1C1B19;--paper:#f6f3ee;--card:#fffdfa;--muted:#726b60;--line:#e3ddd2;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--paper);line-height:1.65;-webkit-font-smoothing:antialiased}
+.serif,h1,h2,h3,blockquote,.e-price,.e-num,.e-statv{font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;font-weight:500;letter-spacing:-.01em}
+a{color:inherit;text-decoration:none}
+.e-wrap{max-width:1140px;margin:0 auto;padding:0 32px}.e-wrap.narrow{max-width:820px}
+.e-kick{display:block;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+.e-head{margin-bottom:52px}.e-head.center{text-align:center}
+.e-head h2{font-size:clamp(30px,4.6vw,52px);line-height:1.05}
+.e-btn{display:inline-block;padding:12px 26px;border:1px solid var(--ink);border-radius:0;font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;transition:background .2s,color .2s}
+.e-btn:hover{background:var(--ink);color:var(--paper)}
+
+.enav{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:22px 32px;transition:background .3s,box-shadow .3s,padding .3s}
+.enav.is-stuck{background:rgba(246,243,238,.9);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line);padding:14px 32px}
+.ebrand{font-family:"Iowan Old Style",Georgia,serif;font-size:22px;font-weight:600;letter-spacing:.04em}
+.elinks{display:flex;gap:30px;align-items:center}
+.elinks a{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.elinks a:hover{color:var(--ink)}
+.eburger{display:none;background:none;border:0;font-size:22px;cursor:pointer}
+
+.e-hero{padding:150px 0 90px}
+.e-hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:end}
+.e-hero h1{font-size:clamp(44px,7vw,86px);line-height:1;margin:18px 0 26px}
+.e-hero-sub{font-size:clamp(17px,1.8vw,20px);color:var(--muted);max-width:44ch;margin-bottom:30px}
+.e-hero-media{aspect-ratio:3/4;background-size:cover;background-position:center;border-radius:2px}
+.e-hero-cta{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+
+.e-stats{display:flex;align-items:center;gap:28px;flex-wrap:wrap;padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:70px}
+.e-stat{display:flex;flex-direction:column}
+.e-statv{font-size:34px;color:var(--accent)}
+.e-statl{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.e-rule{flex:1;height:1px;background:var(--line);min-width:20px}
+
+.e-editorial{padding:100px 0}
+.e-block{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding:56px 0;border-top:1px solid var(--line)}
+.e-block.flip .e-block-media{order:2}
+.e-block-media{aspect-ratio:4/3;background-size:cover;background-position:center;border-radius:2px}
+.e-num{font-size:44px;color:var(--line);display:block;margin-bottom:6px}
+.e-block-copy h3{font-size:clamp(24px,3.2vw,36px);margin-bottom:16px}
+.e-block-copy p{color:var(--muted);font-size:17px;margin-bottom:18px}
+.e-list{list-style:none;display:grid;gap:12px}
+.e-list li{font-size:15px;padding-top:12px;border-top:1px solid var(--line);color:var(--muted)}
+.e-list strong{color:var(--ink);font-weight:600}
+
+.e-portfolio{padding:100px 0;background:var(--card);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.e-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:200px;gap:12px}
+.pf{border:0;background-size:cover;background-position:center;cursor:zoom-in;transition:filter .3s,transform .3s;filter:grayscale(.12)}
+.pf:hover{filter:grayscale(0);transform:scale(1.01)}
+.pf-1{grid-column:span 3;grid-row:span 2}.pf-2{grid-column:span 3}.pf-3{grid-column:span 3}
+.pf-4{grid-column:span 2}.pf-5{grid-column:span 2}.pf-6{grid-column:span 2}
+
+.e-pull{padding:110px 24px;text-align:center;background:var(--ink);color:var(--paper)}
+.e-pull blockquote{font-family:"Iowan Old Style",Georgia,serif;font-size:clamp(26px,4vw,44px);line-height:1.2;max-width:20ch;margin:0 auto;font-style:italic}
+.e-pull cite{display:block;margin-top:24px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-style:normal;color:var(--accent)}
+
+.e-offers{padding:100px 0}
+.e-rows{display:grid;gap:0}
+.e-row{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;padding:32px 0;border-top:1px solid var(--line)}
+.e-row:last-child{border-bottom:1px solid var(--line)}
+.e-row.feat{background:linear-gradient(90deg,rgba(138,109,59,.06),transparent);padding-left:22px;padding-right:22px;margin:0 -22px}
+.e-row-l h3{font-size:24px;margin-bottom:6px}
+.e-row-l p{color:var(--muted);font-size:15px;margin-bottom:12px}
+.e-tags{display:flex;gap:8px;flex-wrap:wrap}
+.e-tags span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:4px 10px;border-radius:999px}
+.e-row-r{text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.e-price{font-size:34px}.e-per{font-size:13px;color:var(--muted);margin-top:-8px}
+
+.e-voices{padding:100px 0;background:var(--card);border-top:1px solid var(--line)}
+.e-voice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.e-voice-grid blockquote{font-family:"Iowan Old Style",Georgia,serif;font-size:19px;line-height:1.5;margin-bottom:18px}
+.e-voice-grid figcaption{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+.e-faq{padding:100px 0}
+.e-faq details{border-top:1px solid var(--line);padding:6px 0}
+.e-faq summary{cursor:pointer;list-style:none;padding:20px 0;font-size:19px;font-family:"Iowan Old Style",Georgia,serif;display:flex;justify-content:space-between}
+.e-faq summary::-webkit-details-marker{display:none}
+.e-faq summary:after{content:"+";color:var(--accent);transition:transform .2s}
+.e-faq details[open] summary:after{transform:rotate(45deg)}
+.e-faq details>div{color:var(--muted);padding:0 0 20px;max-width:64ch}
+
+.e-cta{padding:110px 24px;text-align:center}
+.e-cta h2{font-size:clamp(30px,5vw,54px);margin-bottom:22px}
+.e-cta p{color:var(--muted);max-width:50ch;margin:0 auto 30px;font-size:18px}
+
+footer{border-top:1px solid var(--line);padding:48px 32px}
+.e-foot{max-width:1140px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center;font-size:13px;color:var(--muted)}
+.e-foot .ebrand{color:var(--ink)}
+
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(20,18,15,.94);display:none;align-items:center;justify-content:center;padding:40px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:86vh;border-radius:3px}
+.lb-close{position:absolute;top:22px;right:28px;background:none;border:0;color:#fff;font-size:34px;cursor:pointer}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);background:none;border:0;color:#fff;font-size:40px;cursor:pointer;opacity:.7}
+.lb-prev{left:24px}.lb-next{right:24px}.lb-prev:hover,.lb-next:hover{opacity:1}
+
+[data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+[data-reveal].in{opacity:1;transform:none}
+@media(max-width:900px){
+  .e-hero-grid{grid-template-columns:1fr;gap:34px}.e-hero-media{aspect-ratio:16/10}
+  .e-block,.e-block.flip{grid-template-columns:1fr;gap:26px}.e-block.flip .e-block-media{order:0}
+  .e-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}.pf-1{grid-column:span 2;grid-row:span 1}.pf-2,.pf-3{grid-column:span 2}
+  .e-voice-grid{grid-template-columns:1fr}
+  .elinks{position:absolute;top:100%;right:32px;flex-direction:column;background:var(--card);padding:16px 22px;box-shadow:0 20px 40px -20px rgba(0,0,0,.3);display:none}
+  .elinks.show{display:flex}.eburger{display:block}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body>
+
+<nav class="enav">
+  <a class="ebrand" href="#">Marlowe &amp; Vale</a>
+  <div class="elinks">
+    <a href="#work">Work</a>
+    <a href="#offers">Services</a>
+    <a href="#faq">FAQ</a>
+    <a class="e-btn" href="https://marlowevale.example">View listings</a>
+  </div>
+  <button class="eburger" aria-label="Menu">&#9776;</button>
+</nav>
+
+<header class="e-hero"><div class="e-wrap"><div class="e-hero-grid">
+  <div>
+    <span class="e-kick">Waterfront Estates · Penthouses · Architectural Homes</span>
+    <h1>Where the shoreline becomes a private gallery</h1>
+    <p class="e-hero-sub">Marlowe &amp; Vale curates the most extraordinary waterfront estates, sky-touching penthouses, and architecturally significant residences — each one a singular expression of light, form, and place.</p>
+    <div class="e-hero-cta"><a class="e-btn" href="https://marlowevale.example">View listings</a><a href="#work" class="serif" style="font-size:16px;border-bottom:1px solid var(--accent);padding-bottom:2px">Book a private consultation &rarr;</a></div>
+  </div>
+  <div class="e-hero-media" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-h1.jpg')"></div>
+</div><div class="e-stats" data-reveal><div class="e-stat"><span class="e-statv">$2.4B</span><span class="e-statl">In lifetime sales</span></div><span class="e-rule"></span><div class="e-stat"><span class="e-statv">18</span><span class="e-statl">Years curating luxury</span></div><span class="e-rule"></span><div class="e-stat"><span class="e-statv">4.9</span><span class="e-statl">Average client rating</span></div><span class="e-rule"></span><div class="e-stat"><span class="e-statv">94%</span><span class="e-statl">Listings sold above ask</span></div></div></div></header>
+
+<section class="e-editorial"><div class="e-wrap"><article class="e-block " data-reveal>
+      <div class="e-block-media" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g0.jpg')"></div>
+      <div class="e-block-copy">
+        <span class="e-num">01</span>
+        <h3>An acquisition, not a transaction</h3>
+        <p>We work with a deliberately small circle of buyers, which means every search is personal, unhurried, and relentless in its pursuit of the right property — not just the available one.</p>
+        <ul class="e-list"><li><strong>Off-market access</strong> — Over 60% of our portfolio never reaches a public listing. Our network surfaces homes long before they appear anywhere else.</li><li><strong>Architectural due diligence</strong> — We bring in structural, design, and waterfront specialists so you understand every angle before you make an offer.</li><li><strong>Concierge acquisition</strong> — From private viewings by boat to escrow coordination across continents, we handle the entire process with absolute discretion.</li></ul>
+      </div>
+    </article><article class="e-block flip" data-reveal>
+      <div class="e-block-media" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g1.jpg')"></div>
+      <div class="e-block-copy">
+        <span class="e-num">02</span>
+        <h3>Positioned as a singular asset</h3>
+        <p>Every Marlowe &amp; Vale listing is treated as a one-of-a-kind proposition. We invest in editorial photography, architectural storytelling, and a targeted global marketing campaign before a single inquiry comes in.</p>
+        <ul class="e-list"><li><strong>Editorial presentation</strong> — Each property receives a bespoke monograph — photography, floor plans, and narrative — designed to circulate among the right rooms.</li><li><strong>Global network reach</strong> — Our relationships extend to private wealth managers, family offices, and relocation specialists across London, New York, Singapore, and Dubai.</li><li><strong>Strategic pricing</strong> — We don&#39;t chase comps — we set the ceiling. Our pricing strategy is built on scarcity, provenance, and the story the home tells.</li></ul>
+      </div>
+    </article><article class="e-block " data-reveal>
+      <div class="e-block-media" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g2.jpg')"></div>
+      <div class="e-block-copy">
+        <span class="e-num">03</span>
+        <h3>A record of the remarkable</h3>
+        <p>From a glass-walled cantilever over the Sound to a bronze-clad penthouse above the harbour, our closed sales represent some of the most distinctive residences to change hands in the last decade.</p>
+        <ul class="e-list"><li><strong>Waterfront estates</strong> — Deep-water docks, private beaches, and unbroken horizon lines — homes where the boundary between interior and sea dissolves.</li><li><strong>Penthouses</strong> — Full-floor and duplex residences with private elevators, wraparound terraces, and skyline views that belong to no one else.</li><li><strong>Architectural homes</strong> — Properties of provenance — works by named architects, heritage-listed structures, and newly built statements of contemporary design.</li></ul>
+      </div>
+    </article></div></section>
+
+<section class="e-portfolio" id="work" data-reveal><div class="e-wrap">
+      <div class="e-head"><span class="e-kick">Inside the Portfolio</span><h2>Light, material, and the long view</h2></div>
+      <div class="e-grid"><button class="pf pf-1" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g0.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g0.jpg')" aria-label="Open 1"></button><button class="pf pf-2" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g1.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g1.jpg')" aria-label="Open 2"></button><button class="pf pf-3" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g2.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g2.jpg')" aria-label="Open 3"></button><button class="pf pf-4" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g3.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g3.jpg')" aria-label="Open 4"></button><button class="pf pf-5" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g4.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g4.jpg')" aria-label="Open 5"></button><button class="pf pf-6" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g5.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/auto-marlowe-vale-g5.jpg')" aria-label="Open 6"></button></div>
+    </div></section>
+
+<section class="e-pull"><blockquote>&ldquo;We don&#39;t sell properties. We place them with the people who were always meant to live there.&rdquo;</blockquote><cite>Marlowe &amp; Vale</cite></section>
+
+<section class="e-editorial" style="padding-top:90px"><div class="e-wrap narrow" data-reveal>
+  <span class="e-kick">Our Philosophy</span>
+  <h2 style="font-size:clamp(28px,4vw,44px);margin-bottom:24px">A house is a building. A home is a point of view.</h2>
+  <p style="color:var(--muted);font-size:18px;margin-bottom:18px">Marlowe &amp; Vale was founded on a simple conviction: that the most extraordinary residences are never just square footage and zip codes — they are statements of intent. We built our practice around a small number of clients and an even smaller number of properties, because attention is the one luxury that cannot be manufactured. Every listing we represent is chosen for its architectural integrity, its relationship to the landscape, and the way it makes a person feel the moment they walk through the door.</p>
+  <p style="color:var(--muted);font-size:18px">Our team brings together backgrounds in architecture, fine art, and private wealth advisory — not just real estate. That means we can speak fluently about the cantilever system of a hillside home, the provenance of a mid-century renovation, or the tax implications of a cross-border purchase. We exist for clients who expect the person selling their home to understand it as deeply as the architect who drew it.</p>
+</div></section>
+
+<section class="e-offers" id="offers" data-reveal><div class="e-wrap narrow">
+      <div class="e-head"><span class="e-kick">Featured Residences</span><h2>Currently in our care</h2></div>
+      <div class="e-rows"><div class="e-row">
+        <div class="e-row-l"><h3>The Lighthouse Residence</h3><p>A five-bedroom oceanfront home with a deep-water dock, floor-to-ceiling glazing, and a primary suite cantilevered over the shoreline.</p><div class="e-tags"><span>180 feet of private waterfront</span><span>Architect-designed by Hartwell Studio</span><span>Heated infinity pool and spa</span></div></div>
+        <div class="e-row-r"><span class="e-price">$8.9M</span><span class="e-per">Waterfront estate</span><a class="e-btn" href="https://marlowevale.example">View listings</a></div>
+      </div><div class="e-row feat">
+        <div class="e-row-l"><h3>The Bronze Penthouse</h3><p>A duplex penthouse occupying the entire 42nd floor, with wraparound terraces, private elevator access, and panoramic harbour views in every direction.</p><div class="e-tags"><span>4,200 sq ft of private terrace</span><span>Private elevator and motor court</span><span>Imported bronze and travertine finishes</span></div></div>
+        <div class="e-row-r"><span class="e-price">$12.5M</span><span class="e-per">Full-floor penthouse</span><a class="e-btn" href="https://marlowevale.example">View listings</a></div>
+      </div><div class="e-row">
+        <div class="e-row-l"><h3>The Glass Pavilion</h3><p>A single-storey modernist pavilion set within two acres of native landscape, featuring structural glass walls and a central reflecting pool.</p><div class="e-tags"><span>Designed by award-winning architect</span><span>2 acres of landscaped grounds</span><span>Geothermal heating and solar integration</span></div></div>
+        <div class="e-row-r"><span class="e-price">$6.2M</span><span class="e-per">Architectural home</span><a class="e-btn" href="https://marlowevale.example">View listings</a></div>
+      </div></div>
+    </div></section>
+<section class="e-voices" data-reveal><div class="e-wrap">
+      <div class="e-head center"><span class="e-kick">Client Voices</span><h2>What our clients carry with them</h2></div>
+      <div class="e-voice-grid"><figure><blockquote>&ldquo;They understood our home better than we did. Every viewing, every conversation, every detail was handled with a level of care I didn&#39;t know existed in real estate.&rdquo;</blockquote><figcaption>Eleanor &amp; James Whitfield, <span>Sellers, waterfront estate</span></figcaption></figure><figure><blockquote>&ldquo;We looked for two years on our own. Marlowe &amp; Vale found the right property in six weeks — one that was never publicly listed.&rdquo;</blockquote><figcaption>Dr. Anil Kapoor, <span>Buyer, architectural home</span></figcaption></figure><figure><blockquote>&ldquo;The marketing they produced for our penthouse was unlike anything I&#39;ve seen. It sold above asking in eleven days to an international buyer.&rdquo;</blockquote><figcaption>Sofia Marchetti, <span>Seller, harbour penthouse</span></figcaption></figure></div>
+    </div></section>
+<section class="e-faq" id="faq" data-reveal><div class="e-wrap narrow">
+      <div class="e-head center"><span class="e-kick">FAQ</span><h2>Questions, considered</h2></div>
+      <details><summary>Do you work with buyers who are not yet ready to purchase?</summary><div>Absolutely. Many of our best acquisitions begin as year-long conversations. We maintain relationships with clients long before a transaction is on the table — it&#39;s how we ensure the right property is found, not just the available one.</div></details><details><summary>How do you handle properties that should never be publicly listed?</summary><div>A significant portion of our portfolio is handled discreetly, off-market. We maintain a private register of vetted buyers and sellers who require confidentiality, and we facilitate introductions only when both parties are ready.</div></details><details><summary>What geographic areas do you cover?</summary><div>Our primary focus is waterfront and architecturally significant properties along the coast and in major metropolitan centres. We also work with an international network of partner agencies for clients with cross-border requirements.</div></details><details><summary>How is your commission structured?</summary><div>Our commission reflects the scope of marketing, the uniqueness of the property, and the complexity of the transaction. We discuss this transparently during the initial consultation, before any commitment is made.</div></details>
+    </div></section>
+
+<section class="e-cta" data-reveal><div class="e-wrap narrow">
+  <h2>The right home is not on a listing site</h2>
+  <p>It&#39;s in a conversation, a private register, or the mind of someone who hasn&#39;t decided to sell yet. Let&#39;s begin the search that&#39;s worth your time.</p>
+  <a class="e-btn" href="https://marlowevale.example">View listings</a>
+</div></section>
+
+<footer><div class="e-foot"><span class="ebrand">Marlowe &amp; Vale</span><span>Marlowe &amp; Vale is a boutique luxury real estate practice specialising in waterfront estates, penthouses, and architecturally significant homes. Licensed real estate brokerage. By appointment.</span><a href="mailto:enquiries@marlowevale.example">enquiries@marlowevale.example</a></div></footer>
+
+<div class="lightbox"><button class="lb-close">&times;</button><button class="lb-prev">&#8249;</button><img alt="Portfolio image"><button class="lb-next">&#8250;</button></div>
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var nav = document.querySelector('.enav');
+  if (nav) window.addEventListener('scroll', function(){ nav.classList.toggle('is-stuck', window.scrollY > 30); });
+  var revs = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  if (reduce) revs.forEach(function(r){ r.classList.add('in'); });
+  else { var ro = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target);} }); },{threshold:.14}); revs.forEach(function(r){ ro.observe(r); }); }
+  var shots = [].slice.call(document.querySelectorAll('.pf'));
+  var lb = document.querySelector('.lightbox'), lbImg = lb && lb.querySelector('img');
+  var li = 0, srcs = shots.map(function(s){ return s.getAttribute('data-full'); });
+  function open(i){ li=(i+srcs.length)%srcs.length; lbImg.src=srcs[li]; lb.classList.add('open'); }
+  function close(){ lb.classList.remove('open'); }
+  shots.forEach(function(s,i){ s.addEventListener('click', function(){ open(i); }); });
+  if (lb){ lb.addEventListener('click', function(e){ if(e.target===lb||e.target.classList.contains('lb-close')) close(); });
+    var p=lb.querySelector('.lb-prev'), n=lb.querySelector('.lb-next');
+    if(p)p.addEventListener('click',function(){open(li-1);}); if(n)n.addEventListener('click',function(){open(li+1);});
+    document.addEventListener('keydown',function(e){ if(!lb.classList.contains('open'))return; if(e.key==='Escape')close(); if(e.key==='ArrowLeft')open(li-1); if(e.key==='ArrowRight')open(li+1); });
+  }
+  var burger=document.querySelector('.eburger'), links=document.querySelector('.elinks');
+  if(burger&&links) burger.addEventListener('click',function(){ links.classList.toggle('show'); });
+})();
+</script>
+</body></html>
