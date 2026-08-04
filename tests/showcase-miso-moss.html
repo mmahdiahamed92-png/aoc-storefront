@@ -1,0 +1,352 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Miso &amp; Moss</title>
+<meta name="description" content="An intimate Japanese izakaya where bincho-tan embers glow low, small plates arrive with quiet ceremony, and every cup tells a story. Pull up a stool, lean in, and stay a while.">
+<style>
+:root{--accent:#2D5A3D;--ink:#1A1A17;--bg:#faf8f5;--card:#ffffff;--muted:#6b6660;--line:#eae4dc;--radius:18px;--shadow:0 24px 60px -30px rgba(20,16,12,.35);}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;line-height:1.08;letter-spacing:-.01em;font-weight:600}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.wrap.narrow{max-width:820px}
+.kicker{display:inline-block;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:14px}
+.sec-head{margin-bottom:44px}.sec-head.center{text-align:center}
+.sec-head h2{font-size:clamp(28px,4.4vw,46px)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .2s ease,box-shadow .2s ease,background .2s ease;cursor:pointer;border:1px solid transparent}
+.btn-solid{background:var(--accent);color:#fff;box-shadow:0 14px 30px -12px var(--accent)}
+.btn-solid:hover{transform:translateY(-2px)}
+.btn-ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+
+/* nav */
+.nav{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:18px 24px;transition:background .3s ease,box-shadow .3s ease,padding .3s ease}
+.nav.is-stuck{background:rgba(250,248,245,.82);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);padding:12px 24px}
+.brand{font-family:"Iowan Old Style",Georgia,serif;font-weight:700;font-size:20px;letter-spacing:.02em;color:#fff;mix-blend-mode:difference}
+.nav.is-stuck .brand{color:var(--ink);mix-blend-mode:normal}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:14px;font-weight:500;color:#fff;mix-blend-mode:difference;opacity:.9}
+.nav.is-stuck .nav-links a{color:var(--ink);mix-blend-mode:normal}
+.nav-links a:hover{color:var(--accent);mix-blend-mode:normal;opacity:1}
+.nav .btn-solid{color:#fff;mix-blend-mode:normal}
+.burger{display:none;background:none;border:0;color:#fff;font-size:24px;cursor:pointer;mix-blend-mode:difference}
+
+/* hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;color:#fff}
+.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.2s ease,transform 6s ease;transform:scale(1.06)}
+.hero-slide.active{opacity:1;transform:scale(1)}
+.hero-inner{position:relative;z-index:2;padding:0 24px 96px;max-width:1160px;margin:0 auto;width:100%}
+.hero-eyebrow{font-size:13px;letter-spacing:.28em;text-transform:uppercase;font-weight:700;opacity:.9;margin-bottom:18px}
+.hero h1{font-size:clamp(40px,7vw,84px);max-width:16ch;text-shadow:0 2px 30px rgba(0,0,0,.3)}
+.hero-sub{font-size:clamp(17px,2vw,21px);max-width:52ch;margin:22px 0 32px;opacity:.94}
+.hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-dots{position:absolute;right:26px;bottom:40px;z-index:3;display:flex;gap:10px}
+.hero-dot{width:34px;height:4px;border-radius:2px;border:0;background:rgba(255,255,255,.4);cursor:pointer;transition:background .3s}
+.hero-dot.active{background:#fff}
+.scroll-hint{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:3;font-size:11px;letter-spacing:.2em;text-transform:uppercase;opacity:.7}
+
+/* stats */
+.stats{background:var(--ink);color:#fff;padding:56px 0}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.stat-num{font-family:"Iowan Old Style",Georgia,serif;font-size:clamp(34px,4.5vw,52px);color:var(--accent);font-weight:600}
+.stat-label{font-size:13px;letter-spacing:.08em;text-transform:uppercase;opacity:.72;margin-top:6px}
+
+/* tabs / showcase */
+.showcase{padding:100px 0}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:34px}
+.tab{background:none;border:0;padding:14px 20px;font-size:15px;font-weight:600;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s,border-color .2s}
+.tab.active{color:var(--ink);border-color:var(--accent)}
+.tab-panel{display:none;animation:fade .4s ease}
+.tab-panel.active{display:block}
+.tab-panel h3{font-size:clamp(24px,3vw,34px);margin-bottom:14px}
+.tab-body{color:var(--muted);max-width:60ch;font-size:17px;margin-bottom:28px}
+.tab-items{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tab-item{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px}
+.tab-item h4{font-family:inherit;font-size:17px;font-weight:700;margin-bottom:6px}
+.tab-item p{color:var(--muted);font-size:14.5px}
+
+/* editorial story */
+.story{padding:100px 0;background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.story-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:60px;align-items:center}
+.story-copy .kicker{margin-bottom:16px}
+.story-copy h2{font-size:clamp(30px,4.4vw,48px);margin-bottom:22px}
+.story-copy p{color:var(--muted);font-size:17px;margin-bottom:18px}
+.pull{border-left:3px solid var(--accent);padding:6px 0 6px 22px;margin:26px 0;font-family:"Iowan Old Style",Georgia,serif;font-size:22px;font-style:italic;color:var(--ink)}
+.story-img{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:4/5;background-size:cover;background-position:center}
+
+/* gallery */
+.gallery{padding:100px 0}
+.grid-gal{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:180px;gap:14px}
+.shot{border:0;border-radius:14px;background-size:cover;background-position:center;cursor:zoom-in;transition:transform .35s ease,box-shadow .35s ease;box-shadow:0 10px 30px -18px rgba(0,0,0,.4)}
+.shot:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 20px 40px -20px rgba(0,0,0,.5)}
+.shot-1{grid-column:span 4;grid-row:span 2}
+.shot-2{grid-column:span 2}.shot-3{grid-column:span 2}
+.shot-4{grid-column:span 2}.shot-5{grid-column:span 2;grid-row:span 2}.shot-6{grid-column:span 4}
+
+/* offers */
+.offers{padding:100px 0;background:#fff;border-top:1px solid var(--line)}
+.offer-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+.offer{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);padding:34px 30px;display:flex;flex-direction:column}
+.offer.featured{background:var(--ink);color:#fff;border-color:var(--ink);transform:scale(1.03);box-shadow:var(--shadow)}
+.offer.featured .offer-desc,.offer.featured li{color:rgba(255,255,255,.75)}
+.badge{position:absolute;top:-11px;left:30px;background:var(--accent);color:#fff;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;border-radius:999px}
+.offer h3{font-size:22px;margin-bottom:10px}
+.price{font-family:"Iowan Old Style",Georgia,serif;font-size:40px;font-weight:600;margin-bottom:8px}
+.price span{font-size:15px;color:var(--muted);font-family:inherit}
+.offer.featured .price span{color:rgba(255,255,255,.6)}
+.offer-desc{color:var(--muted);font-size:14.5px;margin-bottom:18px}
+.offer ul{list-style:none;margin:0 0 26px;display:grid;gap:10px}
+.offer li{font-size:14.5px;padding-left:24px;position:relative;color:var(--muted)}
+.offer li:before{content:"";position:absolute;left:0;top:7px;width:14px;height:8px;border-left:2px solid var(--accent);border-bottom:2px solid var(--accent);transform:rotate(-45deg)}
+.offer .btn{margin-top:auto;justify-content:center}
+
+/* reviews */
+.reviews{padding:100px 0}
+.q-stage{position:relative;min-height:180px;max-width:760px;margin:0 auto;text-align:center}
+.quote{position:absolute;inset:0;opacity:0;transition:opacity .5s ease;pointer-events:none}
+.quote.active{opacity:1;position:relative;pointer-events:auto}
+.quote blockquote{font-family:"Iowan Old Style",Georgia,serif;font-size:clamp(21px,2.6vw,28px);line-height:1.4;margin-bottom:22px}
+.quote figcaption strong{display:block;font-size:15px}
+.quote figcaption span{font-size:13px;color:var(--muted)}
+.q-nav{display:flex;gap:12px;justify-content:center;margin-top:34px}
+.q-nav button{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:16px;transition:border-color .2s,color .2s}
+.q-nav button:hover{border-color:var(--accent);color:var(--accent)}
+
+/* faq */
+.faq{padding:100px 0;background:#fff;border-top:1px solid var(--line)}
+.faq-list details{border-bottom:1px solid var(--line);padding:8px 0}
+.faq-list summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:600;font-size:17px;display:flex;justify-content:space-between;align-items:center}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"+";color:var(--accent);font-size:22px;font-weight:400;transition:transform .2s}
+.faq-list details[open] summary:after{transform:rotate(45deg)}
+.faq-a{color:var(--muted);padding:0 0 18px;font-size:15.5px;max-width:64ch}
+
+/* cta band */
+.cta-band{padding:96px 24px;text-align:center;background:linear-gradient(135deg,var(--ink),#2b2622);color:#fff}
+.cta-band h2{font-size:clamp(30px,4.6vw,50px);margin-bottom:16px}
+.cta-band p{opacity:.8;max-width:52ch;margin:0 auto 30px;font-size:18px}
+
+/* footer */
+footer{background:var(--ink);color:rgba(255,255,255,.7);padding:56px 24px}
+.foot-in{max-width:1160px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:24px;align-items:center}
+.foot-in .brand{color:#fff;mix-blend-mode:normal}
+footer a{color:rgba(255,255,255,.7)}footer a:hover{color:#fff}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(8,8,10,.92);display:none;align-items:center;justify-content:center;padding:40px}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:86vh;border-radius:10px;box-shadow:0 30px 80px -20px rgba(0,0,0,.7)}
+.lb-close{position:absolute;top:22px;right:28px;background:none;border:0;color:#fff;font-size:34px;cursor:pointer;line-height:1}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:0;color:#fff;font-size:26px;width:52px;height:52px;border-radius:50%;cursor:pointer}
+.lb-prev{left:24px}.lb-next{right:24px}
+
+[data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+[data-reveal].in{opacity:1;transform:none}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+@media(max-width:900px){
+  .stats-row{grid-template-columns:repeat(2,1fr);gap:32px}
+  .tab-items{grid-template-columns:1fr 1fr}
+  .story-grid{grid-template-columns:1fr;gap:34px}
+  .grid-gal{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}
+  .shot-1,.shot-5,.shot-6{grid-column:span 2;grid-row:span 1}
+  .offer-grid{grid-template-columns:1fr}.offer.featured{transform:none}
+  .nav-links{position:absolute;top:100%;right:24px;flex-direction:column;background:#fff;padding:16px 22px;border-radius:14px;box-shadow:var(--shadow);display:none;min-width:180px}
+  .nav-links.show{display:flex}
+  .nav-links a{color:var(--ink)!important;mix-blend-mode:normal!important}
+  .burger{display:block}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero-slide{transform:none}}
+</style></head><body>
+
+<nav class="nav">
+  <a class="brand" href="#">Miso &amp; Moss</a>
+  <div class="nav-links">
+    <a href="#showcase">Explore</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#offers">Options</a>
+    <a href="#faq">FAQ</a>
+    <a class="btn btn-solid" href="https://misomoss.example">Reserve a Table</a>
+  </div>
+  <button class="burger" aria-label="Menu">&#9776;</button>
+</nav>
+
+<header class="hero">
+  <div class="hero-slide active" style="background-image:linear-gradient(180deg,rgba(10,10,12,.35),rgba(10,10,12,.72)),url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-h1.jpg')"></div><div class="hero-slide" style="background-image:linear-gradient(180deg,rgba(10,10,12,.35),rgba(10,10,12,.72)),url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-h2.jpg')"></div><div class="hero-slide" style="background-image:linear-gradient(180deg,rgba(10,10,12,.35),rgba(10,10,12,.72)),url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-h3.jpg')"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Modern Izakaya · Bincho Grill · Rare Sake</div>
+    <h1>Smoke, Flame &amp; Whispered Sake</h1>
+    <p class="hero-sub">An intimate Japanese izakaya where bincho-tan embers glow low, small plates arrive with quiet ceremony, and every cup tells a story. Pull up a stool, lean in, and stay a while.</p>
+    <div class="hero-cta"><a class="btn btn-solid" href="https://misomoss.example">Reserve a Table</a><a class="btn btn-ghost" style="color:#fff;border-color:rgba(255,255,255,.4)" href="#showcase">View the Menu</a></div>
+  </div>
+  <div class="hero-dots"><button class="hero-dot active" aria-label="Slide 1"></button><button class="hero-dot" aria-label="Slide 2"></button><button class="hero-dot" aria-label="Slide 3"></button></div>
+  <div class="scroll-hint">Scroll</div>
+</header>
+
+<section class="stats" data-reveal><div class="wrap stats-row"><div class="stat"><div class="stat-num" data-target="28" data-suffix="">0</div><div class="stat-label">Skewers Nightly</div></div><div class="stat"><div class="stat-num" data-target="40" data-suffix="+">0+</div><div class="stat-label">Curated Sake Labels</div></div><div class="stat"><div class="stat-num" data-target="24" data-suffix="">0</div><div class="stat-label">Seats by Candlelight</div></div><div class="stat"><div class="stat-num" data-target="4.9" data-suffix="">0</div><div class="stat-label">Diner Rating</div></div></div></section>
+
+<section class="showcase" id="showcase" data-reveal><div class="wrap">
+  <div class="sec-head"><span class="kicker">The Counter</span><h2>Where the embers do the talking</h2></div>
+  <div class="tabs" role="tablist"><button class="tab active" role="tab" aria-selected="true">Menu</button><button class="tab" role="tab" aria-selected="false">Experience</button><button class="tab" role="tab" aria-selected="false">Story</button></div><div class="tab-panel active" role="tabpanel">
+      <h3>Small plates, big intention</h3>
+      <p class="tab-body">Our menu shifts with the seasons and the morning market. Bincho-grilled skewers form the heart of every visit, surrounded by raw, cured, and slow-braised plates designed for sharing and lingering.</p>
+      <div class="tab-items"><div class="tab-item"><h4>Bincho Skewers</h4><p>Wagyu bresaola with sansho, chicken oyster glazed in tare, charcoal-grilled shishito, and whole sweet shrimp kissed by white oak embers.</p></div><div class="tab-item"><h4>Small Plates</h4><p>Hokkaido scallop crudo with yuzu kosho, smoked duck breast with miso mustard, and slow-braised pork belly on a bed of charred leek ash.</p></div><div class="tab-item"><h4>Sake &amp; Pours</h4><p>Forty-plus labels from boutique breweries across Japan — junmai daiginjo, aged koshu, and rare sparkling nigori poured by the carafe or cup.</p></div></div>
+    </div><div class="tab-panel" role="tabpanel">
+      <h3>A room built for closeness</h3>
+      <p class="tab-body">Twenty-four seats, candlelight reflecting off deep green plaster walls, and the low hum of conversation over crackling charcoal. Every detail — from the hand-thrown ceramic cups to the charcoal&#39;s perfume — is composed for a slow, sensory evening.</p>
+      <div class="tab-items"><div class="tab-item"><h4>The Counter</h4><p>Eight seats directly facing the bincho grill, where you watch the chef&#39;s hands work the skewers and feel the warmth of the embers.</p></div><div class="tab-item"><h4>The alcoves</h4><p>Semi-private booths draped in charcoal linen, ideal for couples or small parties wanting a quieter corner of the room.</p></div><div class="tab-item"><h4>Sake Pairings</h4><p>Our staff guides you through a curated flight matched to each course, or builds a bespoke carafe selection around your evening&#39;s mood.</p></div></div>
+    </div><div class="tab-panel" role="tabpanel">
+      <h3>A love letter to the izakaya</h3>
+      <p class="tab-body">Miso &amp; Moss was born from years spent in the narrow drinking alleys of Shinjuku and Kyoto — places where the food is honest, the sake is personal, and the room feels like a secret you&#39;ve been let in on.</p>
+      <div class="tab-items"><div class="tab-item"><h4>The Founders</h4><p>Two friends — a Tokyo-trained grill cook and a sake sommelier from Osaka — who wanted to bring the soul of a true izakaya to a city that needed one.</p></div><div class="tab-item"><h4>The Charcoal</h4><p>We burn only certified bincho-tan, a dense white oak charcoal that burns clean, sears fierce, and imparts a delicate smoke that never overpowers.</p></div><div class="tab-item"><h4>The Room</h4><p>Designed by a Kyoto studio, the space layers deep moss-green walls, blackened ash timber, and hand-poured beeswax candles for a glow that softens every face.</p></div></div>
+    </div>
+</div></section>
+
+<section class="story"><div class="wrap"><div class="story-grid">
+  <div class="story-copy" data-reveal>
+    <span class="kicker">Our Story</span>
+    <h2>Born from late nights and good smoke</h2>
+    <p>Miso &amp; Moss began as a conversation between two friends in a tiny Shinjuku izakaya, hunched over a counter, watching skewers turn over glowing white charcoal. They wondered why no one back home had captured this feeling — the hush, the heat, the way a good cup of sake makes strangers feel like old friends. Years later, they found a narrow space with high ceilings and bad lighting, and began building the room they&#39;d always wanted to drink in. Every surface was chosen to hold candlelight, every cup thrown to feel right in the hand.</p>
+    <p class="pull">Come for the skewers. Stay for the glow.</p>
+    <p>The menu is a living thing — rewritten each week around what the market delivers and what the season demands. The grill is the heartbeat of the kitchen, and the sake list is a constant obsession, with new labels arriving from small breweries most guests have never heard of. We don&#39;t want to be the biggest or the loudest. We want to be the room you think about on a rainy Tuesday, when you want somewhere warm, dark, and quietly alive.</p>
+  </div>
+  <div class="story-img" data-reveal style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-story.jpg')"></div>
+</div></div></section>
+
+<section class="gallery" id="gallery" data-reveal><div class="wrap">
+      <div class="sec-head"><span class="kicker">Inside the Room</span><h2>Candlelight, charcoal &amp; close company</h2></div>
+      <div class="grid-gal"><button class="shot shot-1" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g0.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g0.jpg')" aria-label="Open image 1"></button><button class="shot shot-2" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g1.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g1.jpg')" aria-label="Open image 2"></button><button class="shot shot-3" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g2.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g2.jpg')" aria-label="Open image 3"></button><button class="shot shot-4" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g3.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g3.jpg')" aria-label="Open image 4"></button><button class="shot shot-5" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g4.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g4.jpg')" aria-label="Open image 5"></button><button class="shot shot-1" data-full="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g5.jpg" style="background-image:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/showcase-miso-moss-g5.jpg')" aria-label="Open image 6"></button></div>
+    </div></section>
+<section class="offers" id="offers" data-reveal><div class="wrap">
+      <div class="sec-head"><span class="kicker">Evenings &amp; Tastings</span><h2>Choose your night</h2></div>
+      <div class="offer-grid"><div class="offer">
+        
+        <h3>The Counter Seat</h3>
+        <div class="price">$85<span>per person</span></div>
+        <p class="offer-desc">A walk-in counter experience with a chef&#39;s selection of six bincho skewers, two small plates, and a curated sake flight of three pours.</p>
+        <ul><li>6 chef-selected skewers</li><li>2 seasonal small plates</li><li>3-pour sake flight</li></ul>
+        <a class="btn btn-ghost" href="https://misomoss.example">Reserve a Table</a>
+      </div><div class="offer featured">
+        <span class="badge">Most popular</span>
+        <h3>The Omakase Evening</h3>
+        <div class="price">$145<span>per person</span></div>
+        <p class="offer-desc">Our full tasting journey — ten courses from raw to grilled to braised, paired throughout with five rare and small-batch sake labels. The complete Miso &amp; Moss experience.</p>
+        <ul><li>10-course chef&#39;s tasting</li><li>5-pour premium sake pairing</li><li>Counter or alcove seating</li></ul>
+        <a class="btn btn-solid" href="https://misomoss.example">Reserve a Table</a>
+      </div><div class="offer">
+        
+        <h3>The Late Pour</h3>
+        <div class="price">$45<span>per person</span></div>
+        <p class="offer-desc">A late-night ritual for two — three shared small plates, two skewers each, and a carafe of junmai sake, available after 9:30pm Wednesday through Saturday.</p>
+        <ul><li>3 shared small plates</li><li>2 skewers per person</li><li>Carafe of junmai sake</li></ul>
+        <a class="btn btn-ghost" href="https://misomoss.example">Reserve a Table</a>
+      </div></div>
+    </div></section>
+<section class="reviews" data-reveal><div class="wrap">
+      <div class="sec-head center"><span class="kicker">Word of Mouth</span><h2>What our guests are saying</h2></div>
+      <div class="q-stage"><figure class="quote active"><blockquote>&ldquo;The wagyu skewer alone is worth the reservation. The room feels like a secret you don&#39;t want to share.&rdquo;</blockquote><figcaption><strong>Lena Okafor</strong><span>Food &amp; Wine contributor</span></figcaption></figure><figure class="quote"><blockquote>&ldquo;We came for our anniversary and didn&#39;t want to leave. The sake pairing was unlike anything I&#39;ve had in this city.&rdquo;</blockquote><figcaption><strong>Marcus Tan</strong><span>Diner, two-year regular</span></figcaption></figure><figure class="quote"><blockquote>&ldquo;Bincho charcoal, candlelight, and a sommelier who actually listens. This is what a great night out should feel like.&rdquo;</blockquote><figcaption><strong>Priya Kapoor</strong><span>Local dining guide editor</span></figcaption></figure></div>
+      <div class="q-nav"><button class="q-prev" aria-label="Previous">&#8592;</button><button class="q-next" aria-label="Next">&#8594;</button></div>
+    </div></section>
+<section class="faq" id="faq" data-reveal><div class="wrap narrow">
+      <div class="sec-head center"><span class="kicker">FAQ</span><h2>Good to know</h2></div>
+      <div class="faq-list"><details><summary>Do you take reservations?</summary><div class="faq-a">Yes — we recommend booking ahead, especially for counter seats and weekend evenings. Walk-ins are welcome at the bar, though waits can be long after 8pm.</div></details><details><summary>Can you accommodate dietary restrictions?</summary><div class="faq-a">Absolutely. Let us know when you book and our kitchen will adapt the menu. We have strong vegetarian and pescatarian options, and can adjust for most allergies with notice.</div></details><details><summary>Is the omakase suitable for a first visit?</summary><div class="faq-a">It&#39;s the best way to experience everything we do. The pacing is relaxed, the pairings are generous, and our staff will guide you through each course. Most first-timers leave having found a new favourite sake.</div></details><details><summary>What&#39;s the dress code?</summary><div class="faq-a">Smart casual. The room is intimate and warm — come as you are, but think of it as a night out rather than a quick bite.</div></details></div>
+    </div></section>
+
+<section class="cta-band" data-reveal>
+  <h2>Your table is waiting</h2>
+  <p>Reserve your seat at the counter or in the alcoves. Parties of up to six can book directly online; for larger gatherings or private buyouts, reach out and we&#39;ll craft something memorable.</p>
+  <a class="btn btn-solid" href="https://misomoss.example">Reserve a Table</a>
+</section>
+
+<footer><div class="foot-in">
+  <span class="brand">Miso &amp; Moss</span>
+  <span>Miso &amp; Moss is a modern Japanese izakaya built around bincho-grilled skewers, rare sake, and the quiet warmth of candlelight. Open Wednesday through Sunday, 5:30pm to late.</span>
+  <a href="mailto:reservations@misomoss.example">reservations@misomoss.example</a>
+</div></footer>
+
+<div class="lightbox" aria-hidden="true"><button class="lb-close" aria-label="Close">&times;</button><button class="lb-prev" aria-label="Previous">&#8249;</button><img alt="Gallery image"><button class="lb-next" aria-label="Next">&#8250;</button></div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // sticky nav shade
+  var nav = document.querySelector('.nav');
+  if (nav) { window.addEventListener('scroll', function(){ nav.classList.toggle('is-stuck', window.scrollY > 24); }); }
+
+  // hero carousel
+  var slides = [].slice.call(document.querySelectorAll('.hero-slide'));
+  var dots = [].slice.call(document.querySelectorAll('.hero-dot'));
+  var hi = 0;
+  function go(n){ hi = (n + slides.length) % slides.length; slides.forEach(function(s,i){ s.classList.toggle('active', i===hi); }); dots.forEach(function(d,i){ d.classList.toggle('active', i===hi); }); }
+  dots.forEach(function(d,i){ d.addEventListener('click', function(){ go(i); }); });
+  if (slides.length > 1 && !reduce) { setInterval(function(){ go(hi+1); }, 5000); }
+
+  // tabs
+  var tabs = [].slice.call(document.querySelectorAll('.tab'));
+  var panels = [].slice.call(document.querySelectorAll('.tab-panel'));
+  tabs.forEach(function(t,i){ t.addEventListener('click', function(){
+    tabs.forEach(function(x){ x.classList.remove('active'); x.setAttribute('aria-selected','false'); });
+    panels.forEach(function(p){ p.classList.remove('active'); });
+    t.classList.add('active'); t.setAttribute('aria-selected','true');
+    if (panels[i]) panels[i].classList.add('active');
+  }); });
+
+  // animated counters
+  var counters = [].slice.call(document.querySelectorAll('.stat-num'));
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      var el = e.target; io.unobserve(el);
+      var target = parseFloat(el.getAttribute('data-target')) || 0;
+      var suffix = el.getAttribute('data-suffix') || '';
+      var dec = (String(target).indexOf('.') > -1) ? 1 : 0;
+      if (reduce) { el.textContent = target.toFixed(dec) + suffix; return; }
+      var start = null, dur = 1400;
+      function step(ts){ if(!start) start = ts; var p = Math.min((ts-start)/dur,1); var val = (target*(0.5-Math.cos(Math.PI*p)/2)); el.textContent = val.toFixed(dec) + suffix; if(p<1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(function(c){ io.observe(c); });
+
+  // scroll reveal
+  var revs = [].slice.call(document.querySelectorAll('[data-reveal]'));
+  if (reduce) { revs.forEach(function(r){ r.classList.add('in'); }); }
+  else {
+    var ro = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); ro.unobserve(e.target); } }); }, { threshold: 0.15 });
+    revs.forEach(function(r){ ro.observe(r); });
+  }
+
+  // lightbox gallery
+  var shots = [].slice.call(document.querySelectorAll('.shot'));
+  var lb = document.querySelector('.lightbox');
+  var lbImg = document.querySelector('.lightbox img');
+  var li = 0, srcs = shots.map(function(s){ return s.getAttribute('data-full'); });
+  function open(i){ li=(i+srcs.length)%srcs.length; lbImg.src = srcs[li]; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); }
+  function close(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); }
+  shots.forEach(function(s,i){ s.addEventListener('click', function(){ open(i); }); });
+  if (lb) {
+    lb.addEventListener('click', function(e){ if(e.target===lb || e.target.classList.contains('lb-close')) close(); });
+    var pv = document.querySelector('.lb-prev'), nx = document.querySelector('.lb-next');
+    if (pv) pv.addEventListener('click', function(){ open(li-1); });
+    if (nx) nx.addEventListener('click', function(){ open(li+1); });
+    document.addEventListener('keydown', function(e){ if(!lb.classList.contains('open')) return; if(e.key==='Escape') close(); if(e.key==='ArrowLeft') open(li-1); if(e.key==='ArrowRight') open(li+1); });
+  }
+
+  // testimonial slider
+  var quotes = [].slice.call(document.querySelectorAll('.quote'));
+  var qi = 0;
+  function qgo(n){ qi=(n+quotes.length)%quotes.length; quotes.forEach(function(q,i){ q.classList.toggle('active', i===qi); }); }
+  var qp = document.querySelector('.q-prev'), qn = document.querySelector('.q-next');
+  if (qp) qp.addEventListener('click', function(){ qgo(qi-1); });
+  if (qn) qn.addEventListener('click', function(){ qgo(qi+1); });
+  if (quotes.length > 1 && !reduce) { setInterval(function(){ qgo(qi+1); }, 6000); }
+
+  // mobile nav
+  var burger = document.querySelector('.burger'), links = document.querySelector('.nav-links');
+  if (burger && links) burger.addEventListener('click', function(){ links.classList.toggle('show'); });
+})();
+</script>
+</body></html>
