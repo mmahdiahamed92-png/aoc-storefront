@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Autonomous CEO — Capability Showcase</title>
+<meta name="description" content="Everything the Autonomous Operating Center CEO can design and build — multi-page sites, interactive pages, auto-selected templates, and document packs.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--canvas:#08080c;--ink:#F2F2F7;--dim:#98989F;--card:#12131b;--line:rgba(255,255,255,.09);--gold:#D4AF6A;--goldHi:#E8C98A;--violet:#A78BFA;--cyan:#6EE7FF;--emerald:#30D158}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--canvas);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse 60% 50% at 15% 0%,#D4AF6A22,transparent 60%),radial-gradient(ellipse 50% 45% at 85% 8%,#A78BFA1f,transparent 60%),radial-gradient(ellipse 55% 50% at 70% 95%,#6EE7FF16,transparent 60%);animation:mesh 34s ease-in-out infinite alternate}
+body::after{content:"";position:fixed;inset:0;z-index:-2;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:30px 30px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 0%,#000,transparent 75%)}
+@keyframes mesh{from{transform:translate(-2%,-1%) scale(1.05)}to{transform:translate(2%,1%) scale(1.12)}}
+.wrap{max-width:1152px;margin:0 auto;padding:0 24px}
+h1,h2{font-family:"Space Grotesk",Inter,sans-serif;font-weight:700;letter-spacing:-.02em;line-height:1.05}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:16px}
+.eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+header.hero{padding:120px 0 40px;text-align:center}
+header .eyebrow{justify-content:center}header .eyebrow::after{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+.hero h1{font-size:clamp(34px,6vw,64px);max-width:16ch;margin:0 auto 18px}
+.hero .holo{background:linear-gradient(120deg,var(--gold),var(--goldHi),var(--cyan),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:holo 8s linear infinite}
+@keyframes holo{to{background-position:200% center}}
+.hero p{color:var(--dim);max-width:60ch;margin:0 auto;font-size:clamp(16px,1.7vw,19px)}
+.pill{display:inline-flex;align-items:center;gap:8px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:7px 16px;border-radius:999px;border:1px solid var(--line);background:#D4AF6A14;color:var(--gold);margin-bottom:26px}
+.pill .dot{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 10px var(--emerald)}
+section{padding:56px 0}
+.sec-head{margin-bottom:30px}
+.sec-head h2{font-size:clamp(24px,3.4vw,34px)}
+.sec-head p{color:var(--dim);margin-top:8px;max-width:64ch}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{position:relative;display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,255,255,.06),transparent 40%),linear-gradient(180deg,rgba(20,21,30,.82),rgba(12,13,20,.9));backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:18px;padding:24px;text-decoration:none;color:inherit;transition:transform .25s cubic-bezier(.16,.84,.44,1),border-color .25s,box-shadow .25s}
+.card:hover{transform:translateY(-5px);border-color:#D4AF6A55;box-shadow:0 26px 60px -30px #D4AF6A44}
+.card .tag{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+.card h3{font-size:20px;margin-bottom:6px}
+.card .meta{color:var(--dim);font-size:14px;flex:1}
+.card .go{margin-top:16px;color:var(--gold);font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.card.flag h3::after{content:"live images baking";font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-left:8px;vertical-align:middle;opacity:.6}
+.big{grid-column:span 3;display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+footer{border-top:1px solid var(--line);margin-top:40px;padding:40px 24px;text-align:center;color:var(--dim);font-size:14px}
+footer b{color:var(--gold)}
+@media(max-width:900px){.grid,.big{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid,.big{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap">
+  <span class="pill"><span class="dot"></span>Autonomous Operating Center</span>
+  <div class="eyebrow">What the AI CEO produces</div>
+  <h1>Real websites, built in <span class="holo">our design language</span>.</h1>
+  <p>Every link below was designed and written by the autonomous CEO — multi-page sites, interactive pages, and document packs, across both house styles. Click any card to open the live result.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Flagship</div><h2>Multi-page websites — the design system</h2><p>Full linked sites built on the extracted design DNA (gold + aurora mesh + glass, or warm editorial). Use the in-site nav to move between real pages.</p></div>
+  <div class="grid">
+    <a class="card flag" href="sites/helix/index.html" target="_blank"><div class="tag">Dark luxe · AI platform · 3 pages</div><h3>Helix</h3><div class="meta">Autonomous AI agent swarms. Aurora mesh, glass, holo headline, animated stats.</div><span class="go">Open site →</span></a>
+    <a class="card flag" href="sites/miso-moss/index.html" target="_blank"><div class="tag">Dark luxe · Izakaya · 3 pages</div><h3>Miso &amp; Moss</h3><div class="meta">Candlelit Japanese dining with a full menu section.</div><span class="go">Open site →</span></a>
+    <a class="card flag" href="sites/aurelia/index.html" target="_blank"><div class="tag">Editorial · Day spa · 3 pages</div><h3>Aurelia</h3><div class="meta">Warm cream + serif editorial mode (Mode B).</div><span class="go">Open site →</span></a>
+    <a class="card flag" href="sites/marlowe-vale/index.html" target="_blank"><div class="tag">Editorial · Real estate · 4 pages</div><h3>Marlowe &amp; Vale</h3><div class="meta">Luxury property, editorial layout, portfolio + listings.</div><span class="go">Open site →</span></a>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Single page · interactive</div><h2>Interactive showcase pages</h2><p>One-page sites with a rotating hero carousel, tabs, lightbox gallery, and animated counters.</p></div>
+  <div class="grid">
+    <a class="card" href="tests/showcase-miso-moss.html" target="_blank"><div class="tag">Restaurant</div><h3>Miso &amp; Moss</h3><div class="meta">Carousel + tabs + lightbox.</div><span class="go">Open →</span></a>
+    <a class="card" href="tests/showcase-marlowe-vale.html" target="_blank"><div class="tag">Real estate</div><h3>Marlowe &amp; Vale</h3><div class="meta">Luxury listings showcase.</div><span class="go">Open →</span></a>
+    <a class="card" href="tests/showcase-vantablack.html" target="_blank"><div class="tag">Streetwear</div><h3>VANTABLACK</h3><div class="meta">Monochrome drop page.</div><span class="go">Open →</span></a>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Auto-selected by business type</div><h2>Template auto-pick</h2><p>The CEO chooses the right template per vertical — SaaS → bento, luxury/legal → editorial, hospitality → showcase.</p></div>
+  <div class="grid">
+    <a class="card" href="tests/auto-nimbus.html" target="_blank"><div class="tag">SaaS → Bento (dark)</div><h3>Nimbus</h3><div class="meta">AI project platform.</div><span class="go">Open →</span></a>
+    <a class="card" href="tests/auto-sterling-crowe.html" target="_blank"><div class="tag">Law → Editorial</div><h3>Sterling &amp; Crowe</h3><div class="meta">Corporate law firm.</div><span class="go">Open →</span></a>
+    <a class="card" href="tests/auto-marlowe-vale.html" target="_blank"><div class="tag">Real estate → Editorial</div><h3>Marlowe &amp; Vale</h3><div class="meta">Luxury agency.</div><span class="go">Open →</span></a>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Single page · premium template</div><h2>Landing pages</h2><p>The 24-hour landing-page service across five verticals.</p></div>
+  <div class="grid big">
+    <a class="card" href="tests/nimbus.html" target="_blank"><div class="tag">Fintech / SaaS</div><h3>Nimbus</h3><span class="go">Open →</span></a>
+    <a class="card" href="tests/sterling-crowe.html" target="_blank"><div class="tag">Law</div><h3>Sterling &amp; Crowe</h3><span class="go">Open →</span></a>
+    <a class="card" href="tests/marlowe-vale.html" target="_blank"><div class="tag">Real estate</div><h3>Marlowe &amp; Vale</h3><span class="go">Open →</span></a>
+    <a class="card" href="tests/aurelia-spa.html" target="_blank"><div class="tag">Day spa</div><h3>Aurelia</h3><span class="go">Open →</span></a>
+    <a class="card" href="tests/vantablack.html" target="_blank"><div class="tag">Streetwear</div><h3>VANTABLACK</h3><span class="go">Open →</span></a>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="sec-head"><div class="eyebrow">Document deliverables</div><h2>Copy / SEO / brand packs</h2><p>Non-website services delivered as premium branded documents.</p></div>
+  <div class="grid">
+    <a class="card" href="viewer.html?order=10cde761-5dfb-44ec-9e1a-210b4e1fd563" target="_blank"><div class="tag">Marketing copy pack · delivered £5 order</div><h3>Copy pack</h3><div class="meta">The real end-to-end paid delivery, rendered as a styled document.</div><span class="go">Open →</span></a>
+  </div>
+</div></section>
+
+<footer>Built &amp; delivered by the <b>Autonomous Operating Center</b> — an AI CEO that designs, writes, builds and ships. Every page here was generated, not hand-made.</footer>
+</body></html>
