@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Autonomous Operating Center — Overview</title>
+<style>
+:root{--bg:#0a0c11;--ink:#e9ecf1;--dim:#98a1b2;--card:#12151d;--line:#232838;--accent:#d4af37;--green:#39e07f;--radius:16px}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(1100px 560px at 75% -12%,#1a2033 0%,var(--bg) 62%);color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:70px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+header{padding:30px 0 10px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.brand{font-weight:800;font-size:1.15rem}.brand b{color:var(--accent)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:.8rem;color:var(--dim)}
+.chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;box-shadow:0 0 8px var(--green)}
+.hero{padding:34px 0 18px;max-width:760px}
+.eyebrow{color:var(--accent);text-transform:uppercase;letter-spacing:.16em;font-size:.74rem;font-weight:800}
+h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;margin:10px 0 12px;font-weight:800}
+.sub{color:var(--dim);font-size:1.08rem}
+.flow{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:26px 0 8px}
+@media(min-width:820px){.flow{grid-template-columns:repeat(5,1fr)}}
+.step{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.step b{display:block;font-size:.82rem;color:var(--accent);margin-bottom:3px}
+.step span{font-size:.86rem;color:var(--dim)}
+h2.sec{margin:40px 0 6px;font-size:1.4rem}
+.secsub{color:var(--dim);margin-bottom:18px;font-size:.95rem}
+.grid{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:.2s;display:block;color:inherit;text-decoration:none}
+.tile:hover{transform:translateY(-4px);border-color:var(--accent);box-shadow:0 30px 60px -40px rgba(0,0,0,.7)}
+.thumb{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;background:#fff;border-bottom:1px solid var(--line)}
+.thumb iframe{width:1280px;height:800px;border:0;transform:scale(.362);transform-origin:top left;pointer-events:none}
+.thumb .badge{position:absolute;top:10px;left:10px;background:rgba(10,12,17,.82);color:#fff;font-size:.7rem;font-weight:700;padding:4px 9px;border-radius:999px;backdrop-filter:blur(4px)}
+.meta{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.meta h3{font-size:1.05rem}.meta p{color:var(--dim);font-size:.84rem;margin-top:2px}
+.open{color:var(--accent);font-weight:700;font-size:.85rem;white-space:nowrap}
+footer{color:var(--dim);text-align:center;font-size:.84rem;padding-top:40px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">Autonomous <b>Operating Center</b></div>
+    <div class="chips">
+      <div class="chip"><span class="dot"></span>CEO online 24/7</div>
+      <div class="chip"><span class="dot"></span>Payments live (USDC)</div>
+      <div class="chip">4 services · 79 tests green</div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">Live &amp; autonomous</div>
+    <h1>An AI that runs a business by itself.</h1>
+    <p class="sub">It takes orders, charges USDC, builds the work with AI, waits for one owner approval, and delivers — end to end. Everything below is real, live output.</p>
+  </section>
+
+  <div class="flow">
+    <div class="step"><b>1 · Order</b><span>Customer picks a service on the storefront.</span></div>
+    <div class="step"><b>2 · Pay</b><span>USDC pay-link to the owner's wallet.</span></div>
+    <div class="step"><b>3 · Build</b><span>AI writes copy + generates real images.</span></div>
+    <div class="step"><b>4 · Approve</b><span>Owner taps ✅ in Telegram.</span></div>
+    <div class="step"><b>5 · Deliver</b><span>Customer gets a live link.</span></div>
+  </div>
+
+  <h2 class="sec">🛍️ The storefront</h2>
+  <div class="secsub">Where customers order. Public, live, takes real USDC payments.</div>
+  <div class="grid">
+    <a class="tile" href="./" target="_blank" style="grid-column:1/-1">
+      <div class="thumb"><span class="badge">Storefront · live</span><iframe src="./" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta"><div><h3>Order page</h3><p>4 services · USDC checkout · live status tracking</p></div><div class="open">Open ↗</div></div>
+    </a>
+  </div>
+
+  <h2 class="sec">🎨 Real deliverables (4 industries)</h2>
+  <div class="secsub">Actual output from the live pipeline — each built from a different brief. This is what a paying customer receives.</div>
+  <div class="grid">
+    <a class="tile" href="tests/landing.html" target="_blank">
+      <div class="thumb"><span class="badge">Landing · NovaPay (fintech)</span><iframe src="tests/landing.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta"><div><h3>Landing page — NovaPay</h3><p>Template + AI copy + real Flux images</p></div><div class="open">Open ↗</div></div>
+    </a>
+    <a class="tile" href="sample.html" target="_blank">
+      <div class="thumb"><span class="badge">Landing · Bean There (café)</span><iframe src="sample.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta"><div><h3>Landing page — Bean There</h3><p>Different industry, same premium quality</p></div><div class="open">Open ↗</div></div>
+    </a>
+    <a class="tile" href="tests/seo.html" target="_blank">
+      <div class="thumb"><span class="badge">SEO audit · GreenLeaf</span><iframe src="tests/seo.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta"><div><h3>SEO audit — GreenLeaf</h3><p>Technical · on-page · content, with checklists</p></div><div class="open">Open ↗</div></div>
+    </a>
+    <a class="tile" href="tests/logo.html" target="_blank">
+      <div class="thumb"><span class="badge">Brand pack · Orbit Fitness</span><iframe src="tests/logo.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta"><div><h3>Logo &amp; brand pack — Orbit</h3><p>Concepts · palette · typography · rules</p></div><div class="open">Open ↗</div></div>
+    </a>
+    <a class="tile" href="tests/copy.html" target="_blank">
+      <div class="thumb"><span class="badge">Copy pack · Lumen Skincare</span><iframe src="tests/copy.html" loading="lazy" scrolling="no"></iframe></div>
+      <div class="meta"><div><h3>Marketing copy pack — Lumen</h3><p>Headlines · subheads · props · email · ads</p></div><div class="open">Open ↗</div></div>
+    </a>
+  </div>
+
+  <footer>Free stack throughout — GitHub Pages · Supabase · Pollinations (Flux) · local Ollama. Owner-approved, on-chain paid. © Autonomous Operating Center</footer>
+</div>
+</body>
+</html>
