@@ -16,7 +16,7 @@ else{
   fetch(SB+"/page?order="+id).then(r=>r.text()).then(html=>{
     // The delivered HTML is served as text/plain; render it properly in an iframe.
     const f=document.createElement("iframe");
-    f.setAttribute("sandbox","allow-same-origin allow-popups allow-forms");
+    f.setAttribute("sandbox","allow-scripts allow-popups allow-forms");
     f.srcdoc=html;
     document.body.innerHTML="";document.body.appendChild(f);
   }).catch(e=>{document.getElementById("m").innerHTML="<h1>Couldn't load</h1><p>"+e.message+"</p>";});

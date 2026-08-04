@@ -38,7 +38,7 @@ async function poll(){
  try{
   const s=await fetch(SB+"/status?order="+id).then(x=>x.json());
   if(s.stage==="delivered"){
-   track.innerHTML=`<div class="stage s-done">● delivered</div><div><a class="btn" href="${SB}/page?order=${id}" target="_blank">Open your deliverable →</a></div>`;
+   track.innerHTML=`<div class="stage s-done">● delivered</div><div><a class="btn" href="viewer.html?order=${id}" target="_blank">Open your deliverable →</a></div>`;
    return;
   }
  }catch(e){}
