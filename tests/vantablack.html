@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>VANTABLACK — Wear the void.</title>
+<meta name="description" content="Heavyweight tees, technical shells and zero-compromise accessories. Limited runs. No restocks. Once it's gone, it stays gone."/>
+<style>
+:root{--ink:#14161c;--bg:#fbfaf7;--muted:#5c626f;--line:#ece8e0;--card:#ffffff;--accent:#0a0a0a;--radius:16px;--maxw:1140px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-weight:700;padding:13px 22px;border-radius:999px;transition:transform .15s,filter .15s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)}
+.btn.dark{background:var(--ink)}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.74rem;font-weight:800;color:var(--accent)}
+section{padding:96px 0}
+.head{max-width:680px;margin:0 auto 46px;text-align:center}
+.head h2{font-size:clamp(1.8rem,4vw,2.8rem);margin:.5rem 0 .6rem}
+.head p{color:var(--muted);font-size:1.08rem}
+/* nav */
+header{position:sticky;top:0;z-index:20;background:rgba(251,250,247,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+.nav-links{display:none;gap:26px;font-size:.94rem;color:var(--muted)}
+.nav-links a:hover{color:var(--ink)}
+@media(min-width:820px){.nav-links{display:flex}}
+/* hero */
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;color:#fff;overflow:hidden}
+.hero .bg{position:absolute;inset:0}
+.hero .bg img{width:100%;height:100%;object-fit:cover}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,14,.35),rgba(10,10,14,.72))}
+.hero .inner{position:relative;max-width:760px;padding:40px 0}
+.hero h1{font-size:clamp(2.4rem,6.4vw,4.6rem);margin:.7rem 0 1rem}
+.hero p{font-size:clamp(1.05rem,2.2vw,1.35rem);color:rgba(255,255,255,.9);max-width:560px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.hero .eyebrow{color:#fff;opacity:.85}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:760px;margin:-52px auto 0;position:relative;z-index:5}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:0 20px 40px -28px rgba(0,0,0,.4)}
+.stat b{display:block;font-size:1.9rem;font-weight:800}
+.stat span{color:var(--muted);font-size:.86rem}
+/* features */
+.grid3{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:720px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -30px rgba(0,0,0,.35)}
+.card .ic{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,#fff);color:var(--accent);margin-bottom:16px}
+.card .ic svg{width:26px;height:26px}
+.card h3{font-size:1.2rem;margin-bottom:.4rem}
+.card p{color:var(--muted);font-size:.96rem}
+/* showcase */
+.split{display:grid;grid-template-columns:1fr;gap:44px;align-items:center}
+@media(min-width:860px){.split{grid-template-columns:1.05fr 1fr}}
+.split img{border-radius:var(--radius);width:100%;height:100%;object-fit:cover;box-shadow:0 30px 60px -36px rgba(0,0,0,.5)}
+.split h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin:.6rem 0 1rem}
+.split p{color:var(--muted);font-size:1.05rem;margin-bottom:1rem}
+.ticks{list-style:none;padding:0;display:grid;gap:10px}
+.ticks li{display:flex;gap:10px;align-items:flex-start}
+.ticks svg{width:20px;height:20px;color:var(--accent);flex:0 0 auto;margin-top:3px}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:720px){.gal{grid-template-columns:1fr 1fr}}
+.gal img{aspect-ratio:4/5;object-fit:cover;border-radius:14px;width:100%}
+/* testimonials */
+.tms{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:720px){.tms{grid-template-columns:repeat(3,1fr)}}
+.tm{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.tm .stars{color:var(--accent);letter-spacing:2px;margin-bottom:12px}
+.tm q{font-style:italic;color:var(--ink);display:block;margin-bottom:16px}
+.tm .who{display:flex;align-items:center;gap:12px}
+.tm .av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-weight:800}
+.tm .who b{display:block;font-size:.95rem}.tm .who span{color:var(--muted);font-size:.82rem}
+/* cta band */
+.band{background:var(--ink);color:#fff;border-radius:26px;padding:64px 28px;text-align:center;overflow:hidden;position:relative}
+.band h2{font-size:clamp(1.8rem,4.5vw,3rem);margin-bottom:1rem}
+.band p{color:rgba(255,255,255,.75);max-width:520px;margin:0 auto 26px}
+/* faq */
+.faq{max-width:760px;margin:0 auto}
+details{border-bottom:1px solid var(--line);padding:6px 0}
+summary{cursor:pointer;font-weight:700;padding:14px 4px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-weight:800}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);padding:0 4px 14px}
+/* footer */
+footer{background:#0f1116;color:#c7cad2;padding:60px 0 30px}
+.fgrid{display:grid;grid-template-columns:1fr;gap:30px}
+@media(min-width:720px){.fgrid{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:1rem;margin-bottom:12px}
+footer a{display:block;color:#9aa0ad;font-size:.9rem;margin-bottom:8px}
+footer a:hover{color:#fff}
+.copy{border-top:1px solid #23262e;margin-top:34px;padding-top:20px;color:#8b909b;font-size:.84rem;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+  <div class="logo">VANTABLACK<span>.</span></div>
+  <div class="nav-links"><a href="#features">Features</a><a href="#about">About</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a></div>
+  <a class="btn dark" href="https://vantablack.example" style="padding:9px 18px">Shop the drop</a>
+</nav></div></header>
+
+<section class="hero" style="padding:0">
+  <div class="bg"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/vantablack-hero.jpg" alt="VANTABLACK hero" loading="eager"/></div>
+  <div class="wrap"><div class="inner">
+    <div class="eyebrow">DROP 04 // LIVE NOW</div>
+    <h1>Wear the void.</h1>
+    <p>Heavyweight tees, technical shells and zero-compromise accessories. Limited runs. No restocks. Once it's gone, it stays gone.</p>
+    <div class="cta"><a class="btn" href="https://vantablack.example">Shop the drop</a><a class="btn ghost" href="#about">Learn more</a></div>
+  </div></div>
+</section>
+
+
+
+<section id="features"><div class="wrap">
+  <div class="head"><div class="eyebrow">Why us</div><h2>Built different</h2><p>Every piece engineered for the street — not the algorithm.</p></div>
+  <div class="grid3"><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4.5 13.5H11l-1 8.5L19.5 10H13z"/></svg></div><h3>Heavyweight construction</h3><p>240gsm brushed cotton with reinforced collar binding. Tees that hold their shape wash after wash, season after season.</p></div><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6z"/></svg></div><h3>Technical outerwear</h3><p>Welded seams, matte ripstop shells and water-repellent finishes. Brutalist silhouettes built for concrete weather.</p></div><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 6.3L21 10l-4.8 4 1.5 6.5L12 17l-5.7 3.5L7.8 14 3 10l6.4-.7z"/></svg></div><h3>Limited-run only</h3><p>Each drop caps at 300 units. No restocks, no reruns, no exceptions. If you hesitate, you miss it.</p></div></div>
+</div></section>
+
+<section id="about" style="padding-top:0"><div class="wrap"><div class="split">
+  <div><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/vantablack-about.jpg" alt="VANTABLACK"/></div>
+  <div><div class="eyebrow">Our story</div><h2>No grey area</h2><p>VANTABLACK started in a south London garage with one rule: make clothing with the intensity of the city that built it. We don't do pastels. We don't do safe. Every garment is cut, sampled and stress-tested before it earns the label. The result is a uniform for people who treat the street like a runway and the runway like a battlefield.</p>
+  <ul class="ticks"><li><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 6.3L21 10l-4.8 4 1.5 6.5L12 17l-5.7 3.5L7.8 14 3 10l6.4-.7z"/></svg><span>Independently owned and self-funded since day one</span></li><li><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 6.3L21 10l-4.8 4 1.5 6.5L12 17l-5.7 3.5L7.8 14 3 10l6.4-.7z"/></svg><span>Every fabric sourced and stress-tested in-house</span></li><li><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 6.3L21 10l-4.8 4 1.5 6.5L12 17l-5.7 3.5L7.8 14 3 10l6.4-.7z"/></svg><span>Drops sell out in under 48 hours — every time</span></li><li><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 6.3L21 10l-4.8 4 1.5 6.5L12 17l-5.7 3.5L7.8 14 3 10l6.4-.7z"/></svg><span>Worn by artists, athletes and architects of the underground</span></li></ul>
+  <div style="margin-top:22px"><a class="btn" href="https://vantablack.example">Shop the drop</a></div></div>
+</div></div></section>
+
+<section style="padding-top:0"><div class="wrap"><div class="head"><div class="eyebrow">Gallery</div><h2>The lookbook</h2></div><div class="gal"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/vantablack-g1.jpg" alt="VANTABLACK 1" loading="lazy"/><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/vantablack-g2.jpg" alt="VANTABLACK 2" loading="lazy"/><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/vantablack-g3.jpg" alt="VANTABLACK 3" loading="lazy"/></div></div></section>
+
+<section id="reviews"><div class="wrap"><div class="head"><div class="eyebrow">Loved by customers</div><h2>What the streets say</h2></div><div class="tms"><div class="tm"><div class="stars">★★★★★</div><q>The heavyweight tee is the only blank I wear now. Weight, drape, fit — nothing else comes close.</q><div class="who"><div class="av">M</div><div><b>Marcus Osei</b><span>Stylist &amp; creative director</span></div></div></div><div class="tm"><div class="stars">★★★★★</div><q>VANTABLACK outerwear got me through a full winter without reaching for anything else. The matte finish is unreal.</q><div class="who"><div class="av">L</div><div><b>Lena Kowalska</b><span>Sneaker collector</span></div></div></div><div class="tm"><div class="stars">★★★★★</div><q>Drop day is the only time I set an alarm. Miss it once and you learn real quick.</q><div class="who"><div class="av">D</div><div><b>Devon Reyes</b><span>Photographer</span></div></div></div></div></div></section>
+
+<section><div class="wrap"><div class="band">
+  <h2>Drop 04 won't wait</h2>
+  <p>Tees, shells and accessories are live now. Stock is moving fast and there's no second round. Lock in your size before the void closes.</p>
+  <a class="btn" href="https://vantablack.example" style="background:var(--accent)">Shop the drop</a>
+</div></div></section>
+
+<section id="faq" style="padding-top:0"><div class="wrap"><div class="head"><div class="eyebrow">FAQ</div><h2>Questions, answered</h2></div><div class="faq"><details><summary>Do you restock sold-out items?</summary><p>Never. Every drop is a limited run of 300 units or fewer. Once it sells out, it's archived for good. This keeps every piece rare and every owner early.</p></details><details><summary>What's your shipping turnaround?</summary><p>All orders ship within 48 hours of purchase via tracked courier. UK delivery takes 2–3 working days, international 5–10. You'll get a tracking link the moment it leaves the warehouse.</p></details><details><summary>How do I find my size?</summary><p>Our tees run boxy and oversized by design. If you want a fitted look, size down. Check the size chart on each product page for exact garment measurements — not body measurements.</p></details><details><summary>What's your return policy?</summary><p>Unworn items with tags intact can be returned within 14 days for a full refund. Final-sale items from clearance drops are non-returnable. We'll exchange for a different size if stock allows.</p></details></div></div></section>
+
+<footer><div class="wrap"><div class="fgrid">
+  <div><div class="logo" style="color:#fff;margin-bottom:12px">VANTABLACK</div><p style="color:#9aa0ad;font-size:.9rem;max-width:340px">VANTABLACK is an independent streetwear label. No investors, no shareholders, no compromise. Just heavyweight clothing for people who mean it.</p></div>
+  <div><h4>Explore</h4><a href="#features">Features</a><a href="#about">About</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a></div>
+  <div><h4>Get in touch</h4><a href="https://vantablack.example">Shop the drop</a><a href="mailto:drops@vantablack.example">drops@vantablack.example</a></div>
+</div><div class="copy">© 2026 VANTABLACK. All rights reserved.</div></div></footer>
+</body>
+</html>

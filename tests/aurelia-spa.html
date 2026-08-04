@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Aurelia — Return to Stillness, One Breath at a Time</title>
+<meta name="description" content="Massage, hydrotherapy and botanical facials in a tranquil sanctuary designed to slow the world down — and bring you back to yourself."/>
+<style>
+:root{--ink:#14161c;--bg:#fbfaf7;--muted:#5c626f;--line:#ece8e0;--card:#ffffff;--accent:#8a9a7b;--radius:16px;--maxw:1140px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{line-height:1.08;letter-spacing:-.02em;font-weight:800}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.btn{display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;font-weight:700;padding:13px 22px;border-radius:999px;transition:transform .15s,filter .15s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn.ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)}
+.btn.dark{background:var(--ink)}
+.eyebrow{text-transform:uppercase;letter-spacing:.18em;font-size:.74rem;font-weight:800;color:var(--accent)}
+section{padding:96px 0}
+.head{max-width:680px;margin:0 auto 46px;text-align:center}
+.head h2{font-size:clamp(1.8rem,4vw,2.8rem);margin:.5rem 0 .6rem}
+.head p{color:var(--muted);font-size:1.08rem}
+/* nav */
+header{position:sticky;top:0;z-index:20;background:rgba(251,250,247,.8);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
+.logo span{color:var(--accent)}
+.nav-links{display:none;gap:26px;font-size:.94rem;color:var(--muted)}
+.nav-links a:hover{color:var(--ink)}
+@media(min-width:820px){.nav-links{display:flex}}
+/* hero */
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;color:#fff;overflow:hidden}
+.hero .bg{position:absolute;inset:0}
+.hero .bg img{width:100%;height:100%;object-fit:cover}
+.hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,14,.35),rgba(10,10,14,.72))}
+.hero .inner{position:relative;max-width:760px;padding:40px 0}
+.hero h1{font-size:clamp(2.4rem,6.4vw,4.6rem);margin:.7rem 0 1rem}
+.hero p{font-size:clamp(1.05rem,2.2vw,1.35rem);color:rgba(255,255,255,.9);max-width:560px}
+.hero .cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.hero .eyebrow{color:#fff;opacity:.85}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:760px;margin:-52px auto 0;position:relative;z-index:5}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;text-align:center;box-shadow:0 20px 40px -28px rgba(0,0,0,.4)}
+.stat b{display:block;font-size:1.9rem;font-weight:800}
+.stat span{color:var(--muted);font-size:.86rem}
+/* features */
+.grid3{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:720px){.grid3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px;transition:transform .18s,box-shadow .18s}
+.card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -30px rgba(0,0,0,.35)}
+.card .ic{width:50px;height:50px;border-radius:13px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 14%,#fff);color:var(--accent);margin-bottom:16px}
+.card .ic svg{width:26px;height:26px}
+.card h3{font-size:1.2rem;margin-bottom:.4rem}
+.card p{color:var(--muted);font-size:.96rem}
+/* showcase */
+.split{display:grid;grid-template-columns:1fr;gap:44px;align-items:center}
+@media(min-width:860px){.split{grid-template-columns:1.05fr 1fr}}
+.split img{border-radius:var(--radius);width:100%;height:100%;object-fit:cover;box-shadow:0 30px 60px -36px rgba(0,0,0,.5)}
+.split h2{font-size:clamp(1.7rem,3.6vw,2.5rem);margin:.6rem 0 1rem}
+.split p{color:var(--muted);font-size:1.05rem;margin-bottom:1rem}
+.ticks{list-style:none;padding:0;display:grid;gap:10px}
+.ticks li{display:flex;gap:10px;align-items:flex-start}
+.ticks svg{width:20px;height:20px;color:var(--accent);flex:0 0 auto;margin-top:3px}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:720px){.gal{grid-template-columns:1fr 1fr}}
+.gal img{aspect-ratio:4/5;object-fit:cover;border-radius:14px;width:100%}
+/* testimonials */
+.tms{display:grid;grid-template-columns:1fr;gap:22px}
+@media(min-width:720px){.tms{grid-template-columns:repeat(3,1fr)}}
+.tm{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.tm .stars{color:var(--accent);letter-spacing:2px;margin-bottom:12px}
+.tm q{font-style:italic;color:var(--ink);display:block;margin-bottom:16px}
+.tm .who{display:flex;align-items:center;gap:12px}
+.tm .av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-weight:800}
+.tm .who b{display:block;font-size:.95rem}.tm .who span{color:var(--muted);font-size:.82rem}
+/* cta band */
+.band{background:var(--ink);color:#fff;border-radius:26px;padding:64px 28px;text-align:center;overflow:hidden;position:relative}
+.band h2{font-size:clamp(1.8rem,4.5vw,3rem);margin-bottom:1rem}
+.band p{color:rgba(255,255,255,.75);max-width:520px;margin:0 auto 26px}
+/* faq */
+.faq{max-width:760px;margin:0 auto}
+details{border-bottom:1px solid var(--line);padding:6px 0}
+summary{cursor:pointer;font-weight:700;padding:14px 4px;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--accent);font-weight:800}
+details[open] summary::after{content:"–"}
+details p{color:var(--muted);padding:0 4px 14px}
+/* footer */
+footer{background:#0f1116;color:#c7cad2;padding:60px 0 30px}
+.fgrid{display:grid;grid-template-columns:1fr;gap:30px}
+@media(min-width:720px){.fgrid{grid-template-columns:2fr 1fr 1fr}}
+footer h4{color:#fff;font-size:1rem;margin-bottom:12px}
+footer a{display:block;color:#9aa0ad;font-size:.9rem;margin-bottom:8px}
+footer a:hover{color:#fff}
+.copy{border-top:1px solid #23262e;margin-top:34px;padding-top:20px;color:#8b909b;font-size:.84rem;text-align:center}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+  <div class="logo">Aurelia<span>.</span></div>
+  <div class="nav-links"><a href="#features">Features</a><a href="#about">About</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a></div>
+  <a class="btn dark" href="https://aurelia.example" style="padding:9px 18px">Book Your Retreat</a>
+</nav></div></header>
+
+<section class="hero" style="padding:0">
+  <div class="bg"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/aurelia-spa-hero.jpg" alt="Aurelia hero" loading="eager"/></div>
+  <div class="wrap"><div class="inner">
+    <div class="eyebrow">Day Spa &amp; Wellness Retreat</div>
+    <h1>Return to Stillness, One Breath at a Time</h1>
+    <p>Massage, hydrotherapy and botanical facials in a tranquil sanctuary designed to slow the world down — and bring you back to yourself.</p>
+    <div class="cta"><a class="btn" href="https://aurelia.example">Book Your Retreat</a><a class="btn ghost" href="#about">Learn more</a></div>
+  </div></div>
+</section>
+
+
+
+<section id="features"><div class="wrap">
+  <div class="head"><div class="eyebrow">Why us</div><h2>Restoration, Thoughtfully Designed</h2><p>Every detail at Aurelia is curated to quiet the senses, ease the body and restore natural balance.</p></div>
+  <div class="grid3"><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20c0-8 6-14 16-14 0 10-6 16-16 14z"/><path d="M4 20c4-4 8-6 12-7"/></svg></div><h3>Botanical Facials</h3><p>Plant-based skincare rituals that nourish, brighten and renew — tailored to your skin's unique needs.</p></div><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-9.5-9C1 8.5 3 5 6.5 5 9 5 12 8 12 8s3-3 5.5-3C21 5 23 8.5 21.5 12 19 16.5 12 21 12 21z"/></svg></div><h3>Therapeutic Massage</h3><p>From deep tissue to gentle Swedish, each session melts tension and reconnects you to your body.</p></div><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9z"/><path d="M19 14l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></div><h3>Hydrotherapy Circuits</h3><p>Mineral soaking pools, steam rooms and contrast therapy designed to activate deep healing and calm.</p></div></div>
+</div></section>
+
+<section id="about" style="padding-top:0"><div class="wrap"><div class="split">
+  <div><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/aurelia-spa-about.jpg" alt="Aurelia"/></div>
+  <div><div class="eyebrow">Our story</div><h2>A Sanctuary Built Around Stillness</h2><p>Aurelia was born from a simple belief: that rest is not a reward — it's a necessity. Tucked away from the noise, our retreat blends warm stone textures, natural light and living greenery into a space that asks nothing of you. Here, the pace slows. The breath deepens. And every treatment is an invitation to come home to yourself.</p>
+  <ul class="ticks"><li><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 6.3L21 10l-4.8 4 1.5 6.5L12 17l-5.7 3.5L7.8 14 3 10l6.4-.7z"/></svg><span>Locally sourced botanicals and organic skincare lines</span></li><li><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 6.3L21 10l-4.8 4 1.5 6.5L12 17l-5.7 3.5L7.8 14 3 10l6.4-.7z"/></svg><span>Private treatment suites with natural light and sound buffering</span></li><li><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 6.3L21 10l-4.8 4 1.5 6.5L12 17l-5.7 3.5L7.8 14 3 10l6.4-.7z"/></svg><span>Therapists trained in restorative and trauma-informed bodywork</span></li><li><svg width="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 6.3L21 10l-4.8 4 1.5 6.5L12 17l-5.7 3.5L7.8 14 3 10l6.4-.7z"/></svg><span>Zero-screen zones throughout the entire retreat</span></li></ul>
+  <div style="margin-top:22px"><a class="btn" href="https://aurelia.example">Book Your Retreat</a></div></div>
+</div></div></section>
+
+<section style="padding-top:0"><div class="wrap"><div class="head"><div class="eyebrow">Gallery</div><h2>Moments of Quiet</h2></div><div class="gal"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/aurelia-spa-g1.jpg" alt="Aurelia 1" loading="lazy"/><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/aurelia-spa-g2.jpg" alt="Aurelia 2" loading="lazy"/><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/aurelia-spa-g3.jpg" alt="Aurelia 3" loading="lazy"/></div></div></section>
+
+<section id="reviews"><div class="wrap"><div class="head"><div class="eyebrow">Loved by customers</div><h2>What Our Guests Are Saying</h2></div><div class="tms"><div class="tm"><div class="stars">★★★★★</div><q>I walked in carrying a week of tension I didn't even know I had. I walked out feeling like I'd been gone for days. Aurelia is a rare kind of place.</q><div class="who"><div class="av">P</div><div><b>Priya N.</b><span>Hydrotherapy Circuit Guest</span></div></div></div><div class="tm"><div class="stars">★★★★★</div><q>The botanical facial completely changed my skin — but honestly, the stillness changed my whole week. This is self-care done properly.</q><div class="who"><div class="av">M</div><div><b>Marcus T.</b><span>Signature Facial Member</span></div></div></div><div class="tm"><div class="stars">★★★★★</div><q>Every single detail feels intentional. The warm stone, the sage tones, the hush of it all. I've finally found my sanctuary.</q><div class="who"><div class="av">E</div><div><b>Elena R.</b><span>Monthly Massage Member</span></div></div></div></div></div></section>
+
+<section><div class="wrap"><div class="band">
+  <h2>Your Reset Is Waiting</h2>
+  <p>Reserve your treatment or speak with our wellness team to build a custom retreat day. Gift cards and membership options available.</p>
+  <a class="btn" href="https://aurelia.example" style="background:var(--accent)">Book Your Retreat</a>
+</div></div></section>
+
+<section id="faq" style="padding-top:0"><div class="wrap"><div class="head"><div class="eyebrow">FAQ</div><h2>Questions, answered</h2></div><div class="faq"><details><summary>Do I need to book in advance?</summary><p>We highly recommend booking ahead, especially for weekend and evening slots. Same-day availability is sometimes possible — call us and we'll do our best to welcome you in.</p></details><details><summary>What should I bring?</summary><p>Just yourself. We provide robes, sandals, towels and all treatment essentials. Arrive 15 minutes early to settle in and enjoy a cup of botanical tea before your session.</p></details><details><summary>Can I book a full retreat day?</summary><p>Absolutely. Our Half-Day and Full-Day Retreat packages combine multiple treatments with hydrotherapy access and a nourishing lunch. Perfect for solo restoration or a quiet day with someone close.</p></details><details><summary>Is Aurelia suitable for first-time spa guests?</summary><p>Completely. Our team will gently guide you through every step, and our zero-pressure environment means you set the tone. There's no expectation — only care.</p></details></div></div></section>
+
+<footer><div class="wrap"><div class="fgrid">
+  <div><div class="logo" style="color:#fff;margin-bottom:12px">Aurelia</div><p style="color:#9aa0ad;font-size:.9rem;max-width:340px">Aurelia is a serene day spa and wellness retreat devoted to calm, restoration and intentional self-care. Massage, hydrotherapy, botanical facials — and the rare luxury of quiet.</p></div>
+  <div><h4>Explore</h4><a href="#features">Features</a><a href="#about">About</a><a href="#reviews">Reviews</a><a href="#faq">FAQ</a></div>
+  <div><h4>Get in touch</h4><a href="https://aurelia.example">Book Your Retreat</a><a href="mailto:hello@aurelia.example">hello@aurelia.example</a></div>
+</div><div class="copy">© 2026 Aurelia. All rights reserved.</div></div></footer>
+</body>
+</html>
