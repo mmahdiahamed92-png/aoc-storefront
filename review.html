@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Review your deliverable — Autonomous Operating Center</title>
+<style>
+:root{--bg:#0b0d12;--ink:#e9ecf1;--dim:#9aa3b2;--card:#151823;--line:#242938;--accent:#d4af37;--emerald:#30d158}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:1100px;margin:0 auto;padding:20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:8px 0 18px}
+.brand{font-weight:800}.brand b{color:var(--accent)}
+h1{font-size:1.5rem;margin-bottom:4px}.muted{color:var(--dim);font-size:.92rem}
+.frameWrap{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff;margin:14px 0;height:60vh}
+iframe{width:100%;height:100%;border:0;background:#fff}
+.panel{display:grid;grid-template-columns:1.4fr .9fr;gap:16px;margin-top:8px}
+@media(max-width:800px){.panel{grid-template-columns:1fr}}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.box h2{font-size:1.05rem;margin-bottom:6px}
+label{display:block;font-size:.82rem;color:var(--dim);margin:10px 0 5px}
+textarea{width:100%;min-height:120px;background:#0e111a;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:12px;font:inherit;resize:vertical}
+.btn{display:inline-block;width:100%;margin-top:14px;background:var(--accent);color:#1a1206;border:none;border-radius:10px;padding:13px;font-weight:800;font-size:1rem;cursor:pointer;text-align:center}
+.btn.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.rounds{font-size:.82rem;color:var(--dim);margin-top:10px}
+.note{font-size:.86rem;margin-top:12px;padding:12px;border-radius:10px;display:none}
+.note.ok{display:block;background:#0a2f3a;color:#3fd6ff}
+.note.done{display:block;background:#0a3a1f;color:var(--emerald)}
+.note.err{display:block;background:#3a0a0a;color:#ff6b6b}
+.open{color:var(--accent);font-size:.86rem;text-decoration:none}
+footer{color:var(--dim);text-align:center;font-size:.82rem;padding:26px 0}
+.ideas{font-size:.82rem;color:var(--dim);margin-top:8px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><div class="brand">Autonomous <b>Operating Center</b></div><div class="muted">Your review page</div></header>
+  <h1>Review your website</h1>
+  <p class="muted">Preview your site below. Not perfect yet? Just describe what you'd like changed — our AI updates it, usually within a few minutes. When you're happy, approve it as final.</p>
+
+  <div class="frameWrap"><iframe id="frame" title="Your site preview"></iframe></div>
+  <a class="open" id="openLink" href="#" target="_blank">Open full site in a new tab ↗</a>
+
+  <div class="panel">
+    <div class="box">
+      <h2>Request a change</h2>
+      <div class="muted">Plain language is fine — e.g. "make the hero darker", "change the headline to X", "add a testimonials section to the home page", "friendlier tone on the About page".</div>
+      <label>What would you like changed?</label>
+      <textarea id="req" placeholder="Describe the change…"></textarea>
+      <button class="btn" id="send">Request this change →</button>
+      <div class="rounds" id="rounds"></div>
+      <div class="note" id="note"></div>
+    </div>
+    <div class="box">
+      <h2>Happy with it?</h2>
+      <div class="muted">Approving marks your website final and complete. You can keep requesting changes until you approve.</div>
+      <button class="btn sec" id="approve">Approve — this is final ✓</button>
+      <div class="ideas">Tip: refresh the preview after a change is applied (you'll get a note when it's done).</div>
+    </div>
+  </div>
+</div>
+<footer>Built &amp; delivered by the Autonomous Operating Center</footer>
+<script>
+const SB="https://fnnecltfowhcocitarln.supabase.co/functions/v1";
+const id=new URLSearchParams(location.search).get("order")||"";
+const $=s=>document.querySelector(s);
+function note(cls,msg){const n=$("#note");n.className="note "+cls;n.textContent=msg;}
+async function load(){
+  if(!id){note("err","Missing order id.");return;}
+  try{
+    const s=await fetch(SB+"/status?order="+id).then(r=>r.json());
+    if(s.deliverableUrl){
+      $("#frame").src=s.deliverableUrl+"?cb="+Date.now();
+      $("#openLink").href=s.deliverableUrl;
+    }else{
+      note("ok","Your site is still being built — check back shortly.");
+    }
+  }catch(e){note("err",e.message);}
+}
+$("#send").onclick=async()=>{
+  const request=$("#req").value.trim();
+  if(!request){note("err","Please describe the change.");return;}
+  const b=$("#send");b.disabled=true;b.textContent="Sending…";
+  try{
+    const r=await fetch(SB+"/revise",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({order:id,request})}).then(x=>x.json());
+    if(!r.ok){note("err",r.error||"Couldn't send.");b.disabled=false;b.textContent="Request this change →";return;}
+    $("#req").value="";
+    note("ok","On it — your AI is applying this now. Your site updates at the same link in a few minutes; refresh the preview to see it.");
+  }catch(e){note("err",e.message);}
+  b.disabled=false;b.textContent="Request this change →";
+};
+$("#approve").onclick=async()=>{
+  if(!confirm("Approve this website as final? You can't request more changes after this."))return;
+  const b=$("#approve");b.disabled=true;b.textContent="Approving…";
+  try{
+    const r=await fetch(SB+"/approve",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({order:id})}).then(x=>x.json());
+    if(!r.ok){note("err",r.error||"Couldn't approve.");b.disabled=false;b.textContent="Approve — this is final ✓";return;}
+    note("done","Approved — your website is final. Thank you! Your live link is above.");
+    $("#send").disabled=true;
+  }catch(e){note("err",e.message);b.disabled=false;b.textContent="Approve — this is final ✓";}
+};
+load();
+</script>
+</body>
+</html>
