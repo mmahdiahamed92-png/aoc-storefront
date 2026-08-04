@@ -39,7 +39,7 @@ async function poll(){
   const s=await fetch(SB+"/status?order="+id).then(x=>x.json());
   if(s.stage==="delivered"){
    const link = s.deliverableUrl || ("viewer.html?order="+id);
-   track.innerHTML=`<div class="stage s-done">● delivered</div><div><a class="btn" href="${link}" target="_blank">Open your deliverable →</a></div>`;
+   track.innerHTML=`<div class="stage s-done">● delivered</div><div><a class="btn" href="${link}" target="_blank">Open your deliverable →</a></div><div class="muted" style="margin-top:10px">Just published — if it briefly shows a 404, give it up to a minute and refresh.</div>`;
    return;
   }
  }catch(e){}
