@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Autonomous Operating Center — AI services, delivered</title>
-<meta name="description" content="Order AI-built services — landing pages, SEO audits, logos, copy. Pay in USDC, delivered fast."/>
+<meta name="description" content="Order AI-built services — landing pages, SEO audits, logos, copy. Pay by card, delivered fast."/>
 <style>
 :root{--bg:#0b0d12;--ink:#e9ecf1;--dim:#9aa3b2;--card:#151823;--line:#242938;--accent:#d4af37;--accent2:#8b9b70;--radius:14px}
 *{box-sizing:border-box;margin:0}
@@ -31,24 +31,21 @@ input,textarea{width:100%;background:#0e111a;border:1px solid var(--line);color:
 textarea{min-height:64px;resize:vertical}
 .btn{display:inline-block;width:100%;margin-top:18px;background:var(--accent);color:#1a1206;border:none;border-radius:10px;padding:13px;font-weight:800;font-size:1rem;cursor:pointer;text-align:center}
 .btn.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
-.pay{padding:24px;text-align:center}.amt{font-size:2rem;font-weight:800;margin:6px 0}
-.ref{font-family:ui-monospace,monospace;font-size:.72rem;color:var(--dim);word-break:break-all;background:#0e111a;border:1px solid var(--line);border-radius:8px;padding:8px;margin:12px 0}
-.stage{display:inline-block;padding:6px 12px;border-radius:999px;font-size:.82rem;font-weight:700;margin:10px 0}
-.s-wait{background:#3a2f0a;color:#ffcf3a}.s-build{background:#0a2f3a;color:#3fd6ff}.s-done{background:#0a3a1f;color:#39e07f}
+.trust{display:flex;gap:8px;align-items:center;justify-content:center;color:var(--dim);font-size:.8rem;margin-top:12px}
 footer{color:var(--dim);text-align:center;font-size:.85rem;padding-top:30px}
 .err{color:#ff6b6b;font-size:.85rem;margin-top:10px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header><div class="brand">Autonomous <b>Operating Center</b></div><div style="color:var(--dim);font-size:.85rem">AI services · paid in USDC</div></header>
+  <header><div class="brand">Autonomous <b>Operating Center</b></div><div style="color:var(--dim);font-size:.85rem">AI services · secure card payment</div></header>
   <section class="hero">
     <div class="eyebrow">Built by an autonomous AI</div>
     <h1>Real services, delivered fast.</h1>
-    <p class="sub">Pick what you need. Pay in USDC. Our AI builds it and sends you a link — usually within the hour.</p>
+    <p class="sub">Pick what you need and pay securely by card. Our AI builds it and sends you a private link — usually within the hour.</p>
   </section>
   <section class="grid" id="grid"></section>
-  <footer>Payments in USDC on Solana · Your deliverable is a private link · © Autonomous Operating Center</footer>
+  <footer>Secure card payments by Stripe · Your deliverable is a private link · © Autonomous Operating Center</footer>
 </div>
 <dialog id="dlg"><div id="dlgbody"></div></dialog>
 <script>
@@ -60,7 +57,7 @@ const SERVICES=[
  {sku:"copy-pack",title:"Marketing copy pack",price:59,desc:"Headlines, value props, an email and ad variations that sell."},
 ];
 const grid=document.getElementById("grid");
-grid.innerHTML=SERVICES.map(s=>`<div class="card" data-sku="${s.sku}"><h3>${s.title}</h3><p>${s.desc}</p><div class="price">£${s.price} <small>≈ paid in USDC</small></div><div class="pick">Order now →</div></div>`).join("");
+grid.innerHTML=SERVICES.map(s=>`<div class="card" data-sku="${s.sku}"><h3>${s.title}</h3><p>${s.desc}</p><div class="price">£${s.price} <small>one-off · card</small></div><div class="pick">Order now →</div></div>`).join("");
 const dlg=document.getElementById("dlg"),body=document.getElementById("dlgbody");
 grid.addEventListener("click",e=>{const c=e.target.closest(".card");if(c)openForm(SERVICES.find(s=>s.sku===c.dataset.sku));});
 function openForm(s){
@@ -70,8 +67,10 @@ function openForm(s){
  <label>Target audience</label><input id="f_audience" placeholder="Local coffee lovers and remote workers"/>
  ${s.landing?`<label>Button text → link</label><input id="f_cta" placeholder="Order online"/><input id="f_ctaurl" style="margin-top:6px" placeholder="https://yoursite.com"/>`:""}
  <label>Style / vibe</label><input id="f_style" placeholder="warm, premium, modern"/>
- <label>Your email (for updates)</label><input id="f_email" type="email" placeholder="you@example.com"/>
- <button class="btn" id="submit">Get payment link →</button><div class="err" id="err"></div></div>`;
+ <label>Your email (for your receipt & updates)</label><input id="f_email" type="email" placeholder="you@example.com"/>
+ <button class="btn" id="submit">Continue to secure checkout →</button>
+ <div class="trust">🔒 Payments handled by Stripe — we never see your card details</div>
+ <div class="err" id="err"></div></div>`;
  dlg.showModal();document.getElementById("submit").onclick=()=>submit(s);
 }
 async function submit(s){
@@ -80,28 +79,12 @@ async function submit(s){
  if(!business){err.textContent="Business name is required.";return;}
  const brief={business,about:g("f_about"),audience:g("f_audience"),style:g("f_style"),email:g("f_email")};
  if(s.landing){brief.cta=g("f_cta");brief.ctaUrl=g("f_ctaurl");}
- err.textContent="";document.getElementById("submit").textContent="Creating order…";
+ err.textContent="";const btn=document.getElementById("submit");btn.textContent="Creating secure checkout…";btn.disabled=true;
  try{
   const r=await fetch(SB+"/order",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({sku:s.sku,brief})}).then(x=>x.json());
-  if(!r.ok){err.textContent=r.error||"Something went wrong.";document.getElementById("submit").textContent="Get payment link →";return;}
-  showPay(r);
- }catch(e){err.textContent=e.message;document.getElementById("submit").textContent="Get payment link →";}
-}
-function showPay(r){
- body.innerHTML=`<div class="pay"><div class="eyebrow">Pay to start</div><div class="amt">${r.amountUsdc} USDC</div><div class="muted">${r.service}</div>
- <a class="btn" href="${r.payUrl}">Pay in your Solana wallet</a><button class="btn sec" id="copy">Copy payment link</button>
- <div class="ref">Order ${r.orderId}</div><div id="track"><span class="stage s-wait">● awaiting payment</span><div class="muted">This updates automatically once you pay.</div></div></div>`;
- document.getElementById("copy").onclick=()=>{navigator.clipboard.writeText(r.payUrl);document.getElementById("copy").textContent="Copied ✓";};
- poll(r.orderId);
-}
-async function poll(id){
- const track=document.getElementById("track");
- try{
-  const s=await fetch(SB+"/status?order="+id).then(x=>x.json());
-  if(s.stage==="delivered"){track.innerHTML=`<span class="stage s-done">● delivered</span><div style="margin-top:8px"><a class="btn" href="viewer.html?order=${id}" target="_blank">Open your deliverable →</a></div>`;return;}
-  if(s.stage==="building")track.innerHTML=`<span class="stage s-build">● paid — building your order…</span><div class="muted">Your AI is on it. This page shows your link when ready.</div>`;
- }catch(e){}
- setTimeout(()=>poll(id),8000);
+  if(!r.ok||!r.checkoutUrl){err.textContent=r.error||"Something went wrong.";btn.textContent="Continue to secure checkout →";btn.disabled=false;return;}
+  window.location.href=r.checkoutUrl;
+ }catch(e){err.textContent=e.message;btn.textContent="Continue to secure checkout →";btn.disabled=false;}
 }
 </script>
 </body>

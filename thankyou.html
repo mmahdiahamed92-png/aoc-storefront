@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Payment received — Autonomous Operating Center</title>
+<style>
+:root{--bg:#0b0d12;--ink:#e9ecf1;--dim:#9aa3b2;--card:#151823;--line:#242938;--accent:#d4af37;--radius:14px}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(1200px 600px at 70% -10%,#1a1f2e 0%,var(--bg) 60%);color:var(--ink);font:16px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);max-width:520px;width:100%;padding:34px;text-align:center}
+.tick{width:64px;height:64px;border-radius:50%;background:#0a3a1f;color:#39e07f;display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 18px}
+h1{font-size:1.5rem;margin-bottom:8px}
+.muted{color:var(--dim);font-size:.95rem}
+.stage{display:inline-block;padding:7px 14px;border-radius:999px;font-size:.85rem;font-weight:700;margin:20px 0 8px}
+.s-build{background:#0a2f3a;color:#3fd6ff}.s-done{background:#0a3a1f;color:#39e07f}
+.btn{display:inline-block;margin-top:16px;background:var(--accent);color:#1a1206;border:none;border-radius:10px;padding:13px 22px;font-weight:800;font-size:1rem;cursor:pointer;text-decoration:none}
+.ref{font-family:ui-monospace,monospace;font-size:.72rem;color:var(--dim);margin-top:18px}
+a.home{color:var(--dim);font-size:.85rem;display:inline-block;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="tick">✓</div>
+  <h1>Payment received</h1>
+  <p class="muted">Thank you — your order is confirmed. Our AI is building it now; this page updates automatically and your private link appears here when it's ready.</p>
+  <div id="track"><div class="stage s-build">● building your order…</div><div class="muted">Usually within the hour. You can safely leave this page — your receipt is in your email.</div></div>
+  <div class="ref" id="ref"></div>
+  <a class="home" href="index.html">← Back to services</a>
+</div>
+<script>
+const SB="https://fnnecltfowhcocitarln.supabase.co/functions/v1";
+const id=new URLSearchParams(location.search).get("order")||"";
+document.getElementById("ref").textContent=id?("Order "+id):"";
+async function poll(){
+ if(!id)return;
+ const track=document.getElementById("track");
+ try{
+  const s=await fetch(SB+"/status?order="+id).then(x=>x.json());
+  if(s.stage==="delivered"){
+   track.innerHTML=`<div class="stage s-done">● delivered</div><div><a class="btn" href="viewer.html?order=${id}" target="_blank">Open your deliverable →</a></div>`;
+   return;
+  }
+ }catch(e){}
+ setTimeout(poll,8000);
+}
+poll();
+</script>
+</body>
+</html>
