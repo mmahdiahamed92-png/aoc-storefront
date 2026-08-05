@@ -89,7 +89,10 @@ function card(l){
       ${l.phone?`<a class="chip gold" href="tel:${tel}">📞 ${esc(l.phone)}</a><span class="chip" data-copy="${esc(l.phone)}">Copy #</span>`:""}
       ${l.email?`<a class="chip" href="mailto:${esc(l.email)}">✉ ${esc(l.email)}</a>`:""}
       ${l.sample_url?`<a class="chip" href="${esc(l.sample_url)}" target="_blank">🔗 Open sample</a>`:""}
+      ${l.maps_url?`<a class="chip" href="${esc(l.maps_url)}" target="_blank">🗺 Maps</a>`:""}
     </div>
+    ${l.summary?`<div class="muted" style="margin-top:8px">${esc(l.summary)}</div>`:""}
+    ${l.pitch?`<div class="msg">${esc(l.pitch)}</div><div class="row"><span class="chip gold" data-copy="${esc(l.pitch)}">Copy call script</span></div>`:""}
     ${l.message?`<div class="msg">${esc(l.message)}</div><div class="row"><span class="chip gold" data-copy="${esc(l.message)}">Copy message</span></div>`:""}
     <div class="acts">
       ${["ready","contacted"].includes(l.status)?`<button class="btn sent" data-act="sent" data-id="${l.id}">Mark sent ✓</button>`:""}
