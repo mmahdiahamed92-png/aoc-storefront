@@ -48,7 +48,7 @@ h1{font-size:1.4rem}.h1 b{color:var(--gold)}
 <script>
 const SB="https://fnnecltfowhcocitarln.supabase.co/functions/v1";
 const k=new URLSearchParams(location.search).get("k")||"";
-let all=[], tab="active";
+let all=[], tab="active", NOW=null;
 const $=s=>document.querySelector(s);
 function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1600);}
 function esc(s){return String(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
@@ -57,18 +57,18 @@ async function load(){
   try{
     const r=await fetch(SB+"/leads?k="+encodeURIComponent(k)).then(x=>x.json());
     if(!r.ok){$("#list").innerHTML='<div class="err">'+esc(r.error||"Failed")+'</div>';return;}
-    all=r.leads||[]; render();
+    all=r.leads||[]; NOW=r.now||new Date().toISOString(); render();
   }catch(e){$("#list").innerHTML='<div class="err">'+esc(e.message)+'</div>';}
 }
 function counts(){
-  const c={ready:0,contacted:0,sent:0,won:0,dead:0};
+  const c={ready:0,contacted:0,sent:0,replied:0,quoted:0,won:0,dead:0};
   all.forEach(l=>c[l.status]=(c[l.status]||0)+1);
   return c;
 }
 function render(){
   const c=counts();
   $("#counts").textContent=`${(c.ready||0)+(c.contacted||0)} to send · ${c.sent||0} sent · ${c.won||0} won`;
-  const defs=[["active","To send",(c.ready||0)+(c.contacted||0)],["sent","Sent",c.sent||0],["won","Won",c.won||0],["dead","Skipped",c.dead||0]];
+  const defs=[["active","To send",(c.ready||0)+(c.contacted||0)],["sent","Sent",c.sent||0],["replied","Replied",c.replied||0],["quoted","Quoted",c.quoted||0],["won","Won",c.won||0],["dead","Skipped",c.dead||0]];
   $("#tabs").innerHTML=defs.map(([id,lbl,n])=>`<div class="tab ${tab===id?'on':''}" data-t="${id}">${lbl} (${n})</div>`).join("");
   $("#tabs").querySelectorAll(".tab").forEach(t=>t.onclick=()=>{tab=t.dataset.t;render();});
   const want = tab==="active" ? ["ready","contacted"] : [tab];
@@ -82,8 +82,8 @@ function card(l){
   const tel=(l.phone||"").replace(/[^+0-9]/g,"");
   return `<div class="card">
     <div class="top">
-      <div><div class="name">${esc(l.name)}</div><div class="meta">${esc(l.category||"")}${l.area?" · "+esc(l.area):""}</div></div>
-      <span class="pill p-${l.status}">${l.status}</span>
+      <div><div class="name">${esc(l.name)}</div><div class="meta">${esc(l.category||"")}${l.area?" · "+esc(l.area):""}${l.follow_ups?" · "+l.follow_ups+" follow-up"+(l.follow_ups>1?"s":""):""}</div></div>
+      <span class="pill p-${l.status}">${l.status}${(l.status==='sent'&&l.next_followup_at&&NOW&&Date.parse(l.next_followup_at)<=Date.parse(NOW))?' ⏰':''}</span>
     </div>
     <div class="row">
       ${l.phone?`<a class="chip gold" href="tel:${tel}">📞 ${esc(l.phone)}</a><span class="chip" data-copy="${esc(l.phone)}">Copy #</span>`:""}
@@ -92,7 +92,9 @@ function card(l){
     </div>
     ${l.message?`<div class="msg">${esc(l.message)}</div><div class="row"><span class="chip gold" data-copy="${esc(l.message)}">Copy message</span></div>`:""}
     <div class="acts">
-      ${l.status!=="sent"?`<button class="btn sent" data-act="sent" data-id="${l.id}">Mark sent ✓</button>`:""}
+      ${["ready","contacted"].includes(l.status)?`<button class="btn sent" data-act="sent" data-id="${l.id}">Mark sent ✓</button>`:""}
+      ${["sent","contacted","ready"].includes(l.status)?`<button class="btn" data-act="replied" data-id="${l.id}" style="background:#0a2f3a;color:var(--blue)">Replied</button>`:""}
+      ${l.status!=="won"&&l.status!=="quoted"?`<button class="btn" data-act="quoted" data-id="${l.id}" style="background:#2a2410;color:var(--gold)">Quoted</button>`:""}
       <button class="btn won" data-act="won" data-id="${l.id}">Won 💰</button>
       <button class="btn skip" data-act="dead" data-id="${l.id}">Skip</button>
     </div>
