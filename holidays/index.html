@@ -1,71 +1,129 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Holiday Destinations | OWT Travel</title>
-<meta name="description" content="Where will you go? Maldives, Dubai, Thailand, Bali, Japan and more — custom holiday packages from the UK, free quotes.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<title>OWT Travel — Custom Holiday Packages from the UK</title>
+<meta name="description" content="Maldives, Dubai, Thailand, Bali, Japan & more. Custom holiday packages from the UK — free, no-obligation quotes from OWT Travel.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 <style>
-*{box-sizing:border-box;margin:0}html,body{height:100%}
-body{background:#05090f;color:#fff;font:16px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;overflow:hidden}
-.stage{position:fixed;inset:0;overflow:hidden}
-.slide{position:absolute;inset:-3%;background-size:cover;background-position:center;opacity:0;filter:blur(14px) brightness(.7);transform:scale(1.08);transition:opacity 1.3s ease,filter 1.3s ease,transform 1.3s ease;will-change:opacity,transform,filter}
-.slide.on{opacity:1;filter:blur(0) brightness(1);transform:scale(1);animation:ken 9s ease-out forwards}
-@keyframes ken{from{transform:scale(1)}to{transform:scale(1.12)}}
-.veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,9,15,.35),rgba(5,9,15,.05) 38%,rgba(5,9,15,.9));z-index:2}
-.top{position:absolute;top:0;left:0;right:0;z-index:5;display:flex;justify-content:space-between;align-items:center;padding:20px 24px}
-.brand{font-family:Fraunces,serif;font-weight:800;font-size:1.2rem;letter-spacing:.5px}
-.brand span{color:#f5a623}
-.count{font-size:.8rem;opacity:.8;font-variant-numeric:tabular-nums}
-.cap{position:absolute;left:0;right:0;bottom:0;z-index:5;padding:0 24px 15vh;text-align:center}
-.ey{font-size:.78rem;letter-spacing:5px;text-transform:uppercase;opacity:.9;margin-bottom:10px}
-.cap h1{font-family:Fraunces,serif;font-weight:800;font-size:clamp(3rem,11vw,7rem);line-height:.95;text-shadow:0 6px 40px rgba(0,0,0,.5)}
-.cap p{font-size:clamp(1.05rem,2.6vw,1.5rem);margin:12px auto 24px;max-width:640px;opacity:.96;text-shadow:0 2px 18px rgba(0,0,0,.6)}
-.cap.swap h1,.cap.swap p,.cap.swap .ey,.cap.swap .go{opacity:0;transform:translateY(14px)}
-.cap h1,.cap p,.cap .ey,.cap .go{transition:opacity .6s ease,transform .6s ease}
-.go{display:inline-block;background:#f5a623;color:#3a2500;text-decoration:none;font-weight:800;padding:15px 34px;border-radius:100px;box-shadow:0 10px 40px rgba(245,166,35,.5)}
-.prog{position:absolute;top:0;left:0;height:3px;background:#f5a623;width:0;z-index:6;box-shadow:0 0 12px rgba(245,166,35,.8)}
-.thumbs{position:absolute;left:0;right:0;bottom:18px;z-index:5;display:flex;gap:8px;justify-content:center;overflow-x:auto;padding:0 16px;scrollbar-width:none}
-.thumbs::-webkit-scrollbar{display:none}
-.thumb{flex:0 0 auto;width:62px;height:42px;border-radius:9px;background-size:cover;background-position:center;cursor:pointer;opacity:.5;border:2px solid transparent;transition:opacity .25s,border-color .25s,transform .25s}
-.thumb.on{opacity:1;border-color:#f5a623;transform:translateY(-3px)}
-.nav{position:absolute;top:50%;transform:translateY(-50%);z-index:6;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;width:46px;height:46px;border-radius:50%;font-size:1.4rem;cursor:pointer;backdrop-filter:blur(6px)}
-.nav:hover{background:rgba(255,255,255,.25)}.nav.prev{left:16px}.nav.next{right:16px}
-@media(max-width:620px){.nav{display:none}.cap{padding-bottom:20vh}}
-@media(prefers-reduced-motion:reduce){.slide,.slide.on{animation:none;filter:none}}
+:root{--navy:#0f3460;--navy2:#0a2547;--gold:#ffcc00;--ink:#0b1420;--dim:#5b6f86;--line:#e6edf3;--bg:#fbfdfe}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,ui-sans-serif,system-ui,sans-serif}
+.serif{font-family:Fraunces,Georgia,serif}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:16px 26px;transition:.3s}
+nav.solid{background:var(--navy);box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.logo{font-family:Fraunces,serif;font-weight:800;font-size:1.35rem;color:#fff}.logo b{color:var(--gold)}
+.nbtn{background:var(--gold);color:#3a2500;text-decoration:none;font-weight:800;padding:10px 20px;border-radius:100px;font-size:.9rem}
+.hero{position:relative;min-height:100svh;overflow:hidden;display:flex;align-items:center;color:#fff;text-align:center}
+.hero-bg{position:absolute;inset:-4%;background:url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-maldives-hero.jpg') center/cover;animation:ken 30s ease-in-out infinite alternate}
+@keyframes ken{from{transform:scale(1.04)}to{transform:scale(1.18)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,37,71,.62),rgba(10,37,71,.42) 45%,rgba(10,37,71,.9))}
+.hero-in{position:relative;z-index:2;max-width:900px;margin:0 auto;padding:0 22px}
+.hero .kick{display:inline-block;background:rgba(255,204,0,.16);border:1px solid rgba(255,204,0,.4);color:var(--gold);font-weight:700;font-size:.78rem;letter-spacing:2px;text-transform:uppercase;padding:7px 16px;border-radius:100px;margin-bottom:20px}
+.hero h1{font-family:Fraunces,serif;font-weight:800;font-size:clamp(2.6rem,7vw,5rem);line-height:1.02;text-shadow:0 4px 34px rgba(0,0,0,.4)}
+.hero h1 em{color:var(--gold);font-style:normal}
+.hero p{font-size:clamp(1.05rem,2.4vw,1.4rem);margin:18px auto 28px;max-width:640px;opacity:.96;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.cta{display:inline-block;background:var(--gold);color:#3a2500;text-decoration:none;font-weight:800;padding:16px 34px;border-radius:100px;box-shadow:0 12px 40px rgba(255,204,0,.4);transition:transform .2s}
+.cta:hover{transform:translateY(-2px)}
+.atol{margin-top:26px;font-size:.85rem;opacity:.9;display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+.sec{padding:72px 20px}.wrap{max-width:1180px;margin:0 auto}
+.eyebrow{color:var(--gold);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:.78rem;text-align:center}
+.htitle{font-family:Fraunces,serif;font-size:clamp(1.9rem,4.5vw,3rem);text-align:center;color:var(--navy);margin:8px 0 6px}
+.sub{text-align:center;color:var(--dim);max-width:640px;margin:0 auto 34px}
+.swiper{padding:20px 0 50px;overflow:visible}
+.swiper-slide{width:340px;height:460px}
+@media(max-width:520px){.swiper-slide{width:82vw;height:440px}}
+.dcard{position:relative;width:100%;height:100%;border-radius:22px;overflow:hidden;box-shadow:0 24px 60px rgba(11,20,32,.3);text-decoration:none;display:block}
+.dcard img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease}
+.dcard:hover img{transform:scale(1.06)}
+.dcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,37,71,0) 40%,rgba(10,37,71,.9))}
+.dcard .info{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:22px;color:#fff}
+.dcard .info h3{font-family:Fraunces,serif;font-size:1.7rem;margin-bottom:2px}
+.dcard .info span{font-size:.9rem;opacity:.9}
+.dcard .go{display:inline-block;margin-top:12px;background:var(--gold);color:#3a2500;font-weight:800;font-size:.85rem;padding:8px 16px;border-radius:100px}
+.swiper-pagination-bullet{background:var(--navy);opacity:.3}.swiper-pagination-bullet-active{background:var(--gold);opacity:1}
+.why{background:var(--navy);color:#eaf1f7}
+.wgrid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:820px){.wgrid{grid-template-columns:repeat(2,1fr)}}
+.wcard{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:24px;text-align:center}
+.wcard .ic{font-size:2rem;margin-bottom:8px}.wcard b{display:block;margin-bottom:4px}
+.wcard p{color:#9fb3c6;font-size:.9rem}
+.quote{position:relative;color:#fff;background:linear-gradient(rgba(10,37,71,.85),rgba(10,37,71,.94)),url('https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-bali-hero.jpg') center/cover fixed}
+.card{max-width:580px;margin:0 auto;background:#fff;color:var(--ink);border-radius:22px;padding:32px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.card h2{font-family:Fraunces,serif;font-size:1.9rem;margin-bottom:4px;color:var(--navy)}
+label{display:block;font-size:.8rem;font-weight:700;color:var(--dim);margin:12px 0 5px}
+input,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:13px;font:inherit;color:var(--ink)}
+input:focus,textarea:focus{outline:none;border-color:var(--navy)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:460px){.two{grid-template-columns:1fr}}
+.hp{position:absolute;left:-9999px}
+.btn{width:100%;margin-top:18px;background:var(--gold);color:#3a2500;border:none;border-radius:12px;padding:16px;font-weight:800;font-size:1.05rem;cursor:pointer}
+.trust{text-align:center;color:var(--dim);font-size:.82rem;margin-top:12px}
+.note{margin-top:12px;padding:12px;border-radius:10px;font-size:.9rem;display:none}.note.err{display:block;background:#fdecec;color:#c0392b}
+.done{text-align:center;padding:14px 6px}.done .big{font-size:2.6rem}
+footer{background:var(--navy2);color:#8fa6c0;text-align:center;font-size:.85rem;padding:30px 20px}
+.reveal{opacity:0;transform:translateY(26px);transition:.8s cubic-bezier(.16,.84,.44,1)}.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.hero-bg{animation:none}}
 </style></head>
 <body>
-<div class="stage" id="stage"></div>
-<div class="veil"></div>
-<div class="prog" id="prog"></div>
-<div class="top"><div class="brand">OWT <span>Travel</span></div><div class="count" id="count"></div></div>
-<button class="nav prev" id="prev">‹</button><button class="nav next" id="next">›</button>
-<div class="cap" id="cap"><div class="ey">Where will you go?</div><h1 id="dn"></h1><p id="dt"></p><a class="go" id="dl" href="#">Explore →</a></div>
-<div class="thumbs" id="thumbs"></div>
+<nav id="nav"><div class="logo">OWT <b>Travel</b></div><a class="nbtn" href="#quote">Get a free quote</a></nav>
+<section class="hero"><div class="hero-bg"></div>
+  <div class="hero-in">
+    <span class="kick">ATOL Protected · UK Travel Experts</span>
+    <h1 class="serif">Travel Smarter.<br>Travel <em>Further.</em></h1>
+    <p>Custom holiday packages built around you — the Maldives, Dubai, Bali, Japan and beyond. Tell us your dream trip and we'll call you back with the best price.</p>
+    <a class="cta" href="#quote">Get your free quote →</a>
+    <div class="atol">✓ ATOL Protected &nbsp; ✓ Flexible payments &nbsp; ✓ Real human experts</div>
+  </div>
+</section>
+
+<section class="sec"><div class="wrap">
+  <div class="eyebrow reveal">Explore the world your way</div>
+  <h2 class="htitle reveal">Where will you go?</h2>
+  <p class="sub reveal">Drag, swipe, and pick your paradise — every trip is tailor-made and quoted just for you.</p>
+  <div class="swiper destSwiper"><div class="swiper-wrapper">
+    <div class="swiper-slide"><a class="dcard" href="maldives.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-maldives-hero.jpg" alt="Maldives"><div class="info"><h3>Maldives</h3><span>Overwater villas & the clearest seas on earth</span><br><span class="go">Explore →</span></div></a></div><div class="swiper-slide"><a class="dcard" href="thailand.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-thailand-hero.jpg" alt="Thailand"><div class="info"><h3>Thailand</h3><span>Islands, temples & the warmest welcome</span><br><span class="go">Explore →</span></div></a></div><div class="swiper-slide"><a class="dcard" href="dubai.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-dubai-hero.jpg" alt="Dubai"><div class="info"><h3>Dubai</h3><span>Sunshine, skyscrapers & five-star luxury</span><br><span class="go">Explore →</span></div></a></div><div class="swiper-slide"><a class="dcard" href="bali.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-bali-hero.jpg" alt="Bali"><div class="info"><h3>Bali</h3><span>The Island of the Gods</span><br><span class="go">Explore →</span></div></a></div><div class="swiper-slide"><a class="dcard" href="disneyland-paris.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-disneyland-paris-hero.jpg" alt="Disneyland Paris"><div class="info"><h3>Disneyland Paris</h3><span>The magic, for the whole family</span><br><span class="go">Explore →</span></div></a></div><div class="swiper-slide"><a class="dcard" href="sri-lanka.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-sri-lanka-hero.jpg" alt="Sri Lanka"><div class="info"><h3>Sri Lanka</h3><span>Beaches, tea country & ancient wonders</span><br><span class="go">Explore →</span></div></a></div><div class="swiper-slide"><a class="dcard" href="japan.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-japan-hero.jpg" alt="Japan"><div class="info"><h3>Japan</h3><span>Where tradition meets the future</span><br><span class="go">Explore →</span></div></a></div><div class="swiper-slide"><a class="dcard" href="iceland.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-iceland-hero.jpg" alt="Iceland"><div class="info"><h3>Iceland</h3><span>Fire, ice & the Northern Lights</span><br><span class="go">Explore →</span></div></a></div><div class="swiper-slide"><a class="dcard" href="poland.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-poland-hero.jpg" alt="Poland"><div class="info"><h3>Poland</h3><span>Beautiful cities, incredible value</span><br><span class="go">Explore →</span></div></a></div><div class="swiper-slide"><a class="dcard" href="philippines.html"><img src="https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-philippines-hero.jpg" alt="Philippines"><div class="info"><h3>Philippines</h3><span>7,000 islands of paradise</span><br><span class="go">Explore →</span></div></a></div>
+  </div><div class="swiper-pagination"></div></div>
+</div></section>
+
+<section class="sec why"><div class="wrap">
+  <div class="eyebrow reveal" style="color:var(--gold)">Why book with us</div>
+  <h2 class="htitle reveal" style="color:#fff">The OWT difference</h2>
+  <div class="wgrid" style="margin-top:24px">
+    <div class="wcard reveal"><div class="ic">🛡️</div><b>ATOL Protected</b><p>Your money and your trip are fully protected.</p></div>
+    <div class="wcard reveal"><div class="ic">💬</div><b>Real experts</b><p>A human calls you back — no bots, no call centres.</p></div>
+    <div class="wcard reveal"><div class="ic">💷</div><b>Best price</b><p>Tailor-made packages at today's best price.</p></div>
+    <div class="wcard reveal"><div class="ic">💳</div><b>Flexible payments</b><p>Spread the cost of your dream holiday.</p></div>
+  </div>
+</div></section>
+
+<section class="sec quote" id="quote"><div class="card reveal">
+  <h2>Get your free holiday quote</h2><p style="color:var(--dim)">Tell us where you want to go — a travel expert calls you back, usually same day.</p>
+  <form id="f"><input class="hp" tabindex="-1" autocomplete="off" id="hp">
+    <label>Where do you want to go? *</label><input id="destination" placeholder="e.g. Maldives, Dubai, a beach, anywhere…" required>
+    <div class="two"><div><label>When?</label><input id="when" placeholder="e.g. July, this winter"></div><div><label>How many travelling?</label><input id="pax" placeholder="e.g. 2 adults, 2 kids"></div></div>
+    <label>Rough budget (optional)</label><input id="budget" placeholder="e.g. £2,000 total">
+    <label>Your name *</label><input id="name" placeholder="Full name" required>
+    <div class="two"><div><label>Phone *</label><input id="phone" type="tel" placeholder="Best number to call"></div><div><label>Email</label><input id="email" type="email" placeholder="you@email.com"></div></div>
+    <button class="btn" id="send" type="submit">Get my free quote →</button>
+    <div class="trust">☎️ A real travel expert calls you back — free, no obligation.</div><div class="note" id="note"></div>
+  </form>
+</div></section>
+<footer>OWT Travel · ATOL Protected · Custom holiday packages from the UK · ceo@owtgroupltd.co.uk</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-const S=[{"name":"Maldives","tag":"Overwater villas & the clearest seas on earth","slug":"maldives.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-maldives-hero.jpg"},{"name":"Thailand","tag":"Islands, temples & the warmest welcome","slug":"thailand.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-thailand-hero.jpg"},{"name":"Dubai","tag":"Sunshine, skyscrapers & five-star luxury","slug":"dubai.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-dubai-hero.jpg"},{"name":"Bali","tag":"The Island of the Gods","slug":"bali.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-bali-hero.jpg"},{"name":"Disneyland Paris","tag":"The magic, for the whole family","slug":"disneyland-paris.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-disneyland-paris-hero.jpg"},{"name":"Sri Lanka","tag":"Beaches, tea country & ancient wonders","slug":"sri-lanka.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-sri-lanka-hero.jpg"},{"name":"Japan","tag":"Where tradition meets the future","slug":"japan.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-japan-hero.jpg"},{"name":"Iceland","tag":"Fire, ice & the Northern Lights","slug":"iceland.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-iceland-hero.jpg"},{"name":"Poland","tag":"Beautiful cities, incredible value","slug":"poland.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-poland-hero.jpg"},{"name":"Philippines","tag":"7,000 islands of paradise","slug":"philippines.html","img":"https://fnnecltfowhcocitarln.supabase.co/storage/v1/object/public/aoc-deliverables/img/dest-philippines-hero.jpg"}];
-const stage=document.getElementById("stage"),thumbs=document.getElementById("thumbs"),cap=document.getElementById("cap");
-S.forEach((s,i)=>{const d=document.createElement("div");d.className="slide";d.style.backgroundImage="url('"+s.img+"')";stage.appendChild(d);
-  const t=document.createElement("div");t.className="thumb";t.style.backgroundImage="url('"+s.img+"')";t.onclick=()=>go(i);thumbs.appendChild(t);});
-const slides=[...stage.children],ths=[...thumbs.children];
-let i=-1,timer,DUR=6000;
-function render(n){
-  cap.classList.add("swap");
-  setTimeout(()=>{
-    document.getElementById("dn").textContent=S[n].name;
-    document.getElementById("dt").textContent=S[n].tag;
-    document.getElementById("dl").href=S[n].slug;
-    cap.classList.remove("swap");
-  },300);
-  slides.forEach((el,k)=>el.classList.toggle("on",k===n));
-  ths.forEach((el,k)=>el.classList.toggle("on",k===n));
-  document.getElementById("count").textContent=(n+1)+" / "+S.length;
-  const p=document.getElementById("prog");p.style.transition="none";p.style.width="0";
-  requestAnimationFrame(()=>{p.style.transition="width "+DUR+"ms linear";p.style.width="100%";});
-}
-function go(n){i=(n+S.length)%S.length;render(i);clearInterval(timer);timer=setInterval(()=>go(i+1),DUR);}
-document.getElementById("next").onclick=()=>go(i+1);
-document.getElementById("prev").onclick=()=>go(i-1);
-addEventListener("keydown",e=>{if(e.key==="ArrowRight")go(i+1);if(e.key==="ArrowLeft")go(i-1);});
-// preload then start
-let loaded=0;S.forEach(s=>{const im=new Image();im.onload=im.onerror=()=>{if(++loaded===1)go(0);};im.src=s.img;});
-setTimeout(()=>{if(i<0)go(0);},1200);
+new Swiper('.destSwiper',{effect:'coverflow',grabCursor:true,centeredSlides:true,slidesPerView:'auto',loop:true,speed:700,autoplay:{delay:3200,disableOnInteraction:false},coverflowEffect:{rotate:6,depth:220,modifier:1.4,slideShadows:true},pagination:{el:'.swiper-pagination',clickable:true}});
+const nav=document.getElementById('nav');addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>60));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const FN="https://fnnecltfowhcocitarln.supabase.co/functions/v1/travel-quote",$=id=>document.getElementById(id);
+$('f').onsubmit=async e=>{e.preventDefault();
+  const b={hp:$('hp').value,name:$('name').value,phone:$('phone').value,email:$('email').value,destination:$('destination').value,when:$('when').value,pax:$('pax').value,budget:$('budget').value};
+  if(!b.name||!b.destination||(!b.phone&&!b.email)){$('note').className='note err';$('note').textContent='Please add your name, where you want to go, and a phone or email.';return;}
+  const btn=$('send');btn.disabled=true;btn.textContent='Sending…';
+  try{const r=await fetch(FN,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(b)}).then(x=>x.json());
+    if(!r.ok){$('note').className='note err';$('note').textContent=r.error||'Please try again.';btn.disabled=false;btn.textContent='Get my free quote →';return;}
+    $('quote').innerHTML='<div class="card"><div class="done"><div class="big">✈️</div><h2 class="serif" style="color:var(--navy)">Thank you, '+(b.name.split(' ')[0]||'')+'!</h2><p>Your enquiry is in — a travel expert will call you shortly to build your '+b.destination+' package.</p></div></div>';
+  }catch(err){$('note').className='note err';$('note').textContent=err.message;btn.disabled=false;btn.textContent='Get my free quote →';}
+};
 </script></body></html>
