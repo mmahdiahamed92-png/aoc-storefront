@@ -2,117 +2,142 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Outreach queue — AOC</title>
+<title>Lead Center — OWT</title>
 <style>
-:root{--bg:#0b0d12;--ink:#e9ecf1;--dim:#9aa3b2;--card:#151823;--line:#242938;--gold:#d4af37;--green:#30d158;--blue:#3fd6ff}
+:root{--bg:#0b0d12;--pan:#151823;--line:#242938;--ink:#e9ecf1;--dim:#9aa3b2;--gold:#d4af37;--green:#30d158;--blue:#3fd6ff;--red:#ff6b6b}
 *{box-sizing:border-box;margin:0}
-body{background:var(--bg);color:var(--ink);font:16px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
-.wrap{max-width:920px;margin:0 auto;padding:20px 16px 60px}
-header{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:6px 0 4px;flex-wrap:wrap}
-h1{font-size:1.4rem}.h1 b{color:var(--gold)}
-.sub{color:var(--dim);font-size:.9rem;margin-bottom:14px}
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 16px}
-.tab{background:var(--card);border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:6px 13px;font-size:.85rem;cursor:pointer}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+header{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:6px 0 12px}
+h1{font-size:1.3rem}h1 b{color:var(--gold)}
+.me{font-size:.85rem;color:var(--dim)}.me b{color:var(--ink)}.me a{color:var(--blue);cursor:pointer;margin-left:8px;text-decoration:none}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 14px}
+.tab{background:var(--pan);border:1px solid var(--line);color:var(--dim);border-radius:999px;padding:7px 14px;font-size:.86rem;cursor:pointer}
 .tab.on{color:var(--ink);border-color:var(--gold)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;margin-bottom:12px}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
-.name{font-weight:800;font-size:1.08rem}
-.meta{color:var(--dim);font-size:.85rem;margin-top:2px}
+.card{background:var(--pan);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:12px}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.name{font-weight:800;font-size:1.1rem}.meta{color:var(--dim);font-size:.85rem;margin-top:2px}
 .pill{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
-.p-ready{background:#0a2f3a;color:var(--blue)}.p-contacted{background:#0a2f3a;color:var(--blue)}
-.p-sent{background:#2a2410;color:var(--gold)}.p-won{background:#0a3a1f;color:var(--green)}.p-dead{background:#2a2a2a;color:#888}
+.p-ready,.p-contacted{background:#0a2f3a;color:var(--blue)}.p-callback{background:#3a2c0a;color:var(--gold)}
+.p-quoted{background:#2a2410;color:var(--gold)}.p-sent{background:#0a2f3a;color:var(--blue)}.p-won{background:#0a3a1f;color:var(--green)}.p-dead{background:#2a2a2a;color:#888}.p-replied{background:#0a2f3a;color:var(--blue)}
+.owner{font-size:.72rem;font-weight:700;padding:3px 9px;border-radius:999px;background:#241a30;color:#c9a6ff}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:10px}
-.chip{display:inline-flex;align-items:center;gap:6px;background:#0e111a;border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:.86rem;color:var(--ink);text-decoration:none;cursor:pointer}
+.chip{display:inline-flex;gap:6px;align-items:center;background:#0e111a;border:1px solid var(--line);border-radius:9px;padding:8px 11px;font-size:.86rem;color:var(--ink);text-decoration:none;cursor:pointer}
 .chip.gold{border-color:var(--gold);color:var(--gold)}
-.msg{margin-top:10px;background:#0e111a;border:1px solid var(--line);border-radius:10px;padding:11px;font-size:.9rem;white-space:pre-wrap;color:#cfd6e2}
-.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:11px}
-.btn{border:none;border-radius:9px;padding:9px 13px;font-weight:700;font-size:.86rem;cursor:pointer}
-.btn.sent{background:var(--gold);color:#1a1206}.btn.won{background:var(--green);color:#062012}.btn.skip{background:transparent;color:var(--dim);border:1px solid var(--line)}
+.summary{margin-top:9px;color:var(--dim);font-size:.9rem}
+.script{margin-top:9px;background:#0e111a;border:1px solid var(--line);border-radius:10px;padding:11px;font-size:.9rem;white-space:pre-wrap;color:#cfd6e2}
+.notes{margin-top:9px;font-size:.84rem;color:#b9c2cf;white-space:pre-wrap;background:#0e111a;border-left:2px solid var(--line);padding:8px 10px;border-radius:0 8px 8px 0}
+textarea{width:100%;margin-top:9px;background:#0e111a;border:1px solid var(--line);color:var(--ink);border-radius:9px;padding:10px;font:inherit;min-height:52px;resize:vertical}
+.acts{display:flex;gap:7px;flex-wrap:wrap;margin-top:11px}
+.btn{border:none;border-radius:9px;padding:10px 13px;font-weight:700;font-size:.86rem;cursor:pointer}
+.btn.pick{background:var(--gold);color:#1a1206;width:100%;font-size:1rem;padding:13px}
+.btn.q{background:#2a2410;color:var(--gold)}.btn.cb{background:#3a2c0a;color:var(--gold)}.btn.won{background:var(--green);color:#052012}.btn.no{background:transparent;color:var(--dim);border:1px solid var(--line)}.btn.note{background:#123;color:var(--blue)}.btn.rel{background:transparent;color:var(--dim);border:1px solid var(--line)}
 .empty{color:var(--dim);text-align:center;padding:40px 0}
-.err{background:#3a0a0a;color:#ff6b6b;padding:12px;border-radius:10px;margin-top:14px}
-.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#0a3a1f;color:var(--green);padding:10px 16px;border-radius:10px;font-size:.9rem;opacity:0;transition:opacity .2s;pointer-events:none}
-.toast.show{opacity:1}
+.err{background:#3a0a0a;color:var(--red);padding:12px;border-radius:9px}
+.gate{max-width:420px;margin:14vh auto;background:var(--pan);border:1px solid var(--line);border-radius:16px;padding:28px;text-align:center}
+.gate input{width:100%;margin-top:14px;background:#0e111a;border:1px solid var(--line);color:var(--ink);border-radius:10px;padding:13px;font:inherit;font-size:1.05rem;text-align:center}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#0a3a1f;color:var(--green);padding:10px 16px;border-radius:10px;font-size:.9rem;opacity:0;transition:.2s;pointer-events:none;z-index:9}
+.toast.show{opacity:1}.toast.bad{background:#3a0a0a;color:var(--red)}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
-    <div class="h1"><h1>Outreach <b>queue</b></h1></div>
-    <div class="sub" id="counts"></div>
-  </header>
-  <p class="sub">Your CEO builds these in the background — real local businesses with no website, each with a free sample site + a ready message. Text or call them, then mark it. When one pays, mark it Won.</p>
-  <div class="tabs" id="tabs"></div>
-  <div id="list"></div>
-</div>
+<div id="app"></div>
 <div class="toast" id="toast"></div>
 <script>
-const SB="https://fnnecltfowhcocitarln.supabase.co/functions/v1";
-const k=new URLSearchParams(location.search).get("k")||"";
-let all=[], tab="active", NOW=null;
+const FN="https://fnnecltfowhcocitarln.supabase.co/functions/v1";
+const K=new URLSearchParams(location.search).get("k")||"589dcff765572fd7cbda651202887935";
+let all=[], NOW=null, tab="available", me=localStorage.getItem("aoc_agent")||"";
 const $=s=>document.querySelector(s);
-function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1600);}
 function esc(s){return String(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
-async function load(){
-  if(!k){$("#list").innerHTML='<div class="err">Missing access key. Open the link with ?k=… that Claude gave you.</div>';return;}
-  try{
-    const r=await fetch(SB+"/leads?k="+encodeURIComponent(k)).then(x=>x.json());
-    if(!r.ok){$("#list").innerHTML='<div class="err">'+esc(r.error||"Failed")+'</div>';return;}
-    all=r.leads||[]; NOW=r.now||new Date().toISOString(); render();
-  }catch(e){$("#list").innerHTML='<div class="err">'+esc(e.message)+'</div>';}
+function toast(m,bad){const t=$("#toast");t.textContent=m;t.className="toast show"+(bad?" bad":"");setTimeout(()=>t.className="toast",1700);}
+
+function gate(){
+  $("#app").innerHTML=`<div class="gate"><h1>Lead <b>Center</b></h1>
+    <p class="me" style="margin-top:8px">Enter your name to start picking up leads.</p>
+    <input id="nm" placeholder="Your name" autocomplete="name">
+    <button class="btn pick" style="margin-top:14px" onclick="setMe()">Start calling →</button></div>`;
+  const i=$("#nm"); i.focus(); i.onkeydown=e=>{if(e.key==="Enter")setMe();};
 }
-function counts(){
-  const c={ready:0,contacted:0,sent:0,replied:0,quoted:0,won:0,dead:0};
-  all.forEach(l=>c[l.status]=(c[l.status]||0)+1);
-  return c;
+window.setMe=function(){const v=$("#nm").value.trim();if(!v){toast("Enter your name",1);return;}me=v;localStorage.setItem("aoc_agent",v);shell();load();};
+window.changeMe=function(){localStorage.removeItem("aoc_agent");me="";gate();};
+
+function shell(){
+  $("#app").innerHTML=`<div class="wrap">
+    <header><h1>Lead <b>Center</b></h1><div class="me">You: <b>${esc(me)}</b><a onclick="changeMe()">change</a></div></header>
+    <div class="tabs" id="tabs"></div><div id="list"></div></div>`;
+}
+async function load(){
+  try{
+    const r=await fetch(FN+"/leads?k="+encodeURIComponent(K)).then(x=>x.json());
+    if(!r.ok){$("#list").innerHTML='<div class="err">'+esc(r.error)+'</div>';return;}
+    all=r.leads||[]; NOW=r.now; render();
+  }catch(e){if($("#list"))$("#list").innerHTML='<div class="err">'+esc(e.message)+'</div>';}
+}
+function buckets(){
+  const avail=all.filter(l=>!l.assigned_to&&["ready","contacted"].includes(l.status));
+  const mine=all.filter(l=>l.assigned_to===me&&!["won","dead"].includes(l.status));
+  const won=all.filter(l=>l.status==="won");
+  return {avail,mine,won};
 }
 function render(){
-  const c=counts();
-  $("#counts").textContent=`${(c.ready||0)+(c.contacted||0)} to send · ${c.sent||0} sent · ${c.won||0} won`;
-  const defs=[["active","To send",(c.ready||0)+(c.contacted||0)],["sent","Sent",c.sent||0],["replied","Replied",c.replied||0],["quoted","Quoted",c.quoted||0],["won","Won",c.won||0],["dead","Skipped",c.dead||0]];
-  $("#tabs").innerHTML=defs.map(([id,lbl,n])=>`<div class="tab ${tab===id?'on':''}" data-t="${id}">${lbl} (${n})</div>`).join("");
+  const b=buckets();
+  const defs=[["available","Available",b.avail.length],["mine","My leads",b.mine.length],["won","Won 💰",b.won.length]];
+  $("#tabs").innerHTML=defs.map(([id,l,n])=>`<div class="tab ${tab===id?'on':''}" data-t="${id}">${l} (${n})</div>`).join("");
   $("#tabs").querySelectorAll(".tab").forEach(t=>t.onclick=()=>{tab=t.dataset.t;render();});
-  const want = tab==="active" ? ["ready","contacted"] : [tab];
-  const rows=all.filter(l=>want.includes(l.status));
-  if(!rows.length){$("#list").innerHTML='<div class="empty">Nothing here yet. New prospects appear automatically as the CEO builds them.</div>';return;}
+  const rows=tab==="available"?b.avail:tab==="mine"?b.mine:b.won;
+  if(!rows.length){$("#list").innerHTML='<div class="empty">'+(tab==="available"?"No unclaimed leads right now — new ones arrive automatically.":tab==="mine"?"You haven't picked up any leads yet. Check Available.":"No wins yet — go close some!")+'</div>';return;}
   $("#list").innerHTML=rows.map(card).join("");
-  $("#list").querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.dataset.copy);toast("Copied");});
-  $("#list").querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>mark(b.dataset.id,b.dataset.act));
+  wire();
 }
 function card(l){
   const tel=(l.phone||"").replace(/[^+0-9]/g,"");
-  return `<div class="card">
-    <div class="top">
-      <div><div class="name">${esc(l.name)}</div><div class="meta">${esc(l.category||"")}${l.area?" · "+esc(l.area):""}${l.follow_ups?" · "+l.follow_ups+" follow-up"+(l.follow_ups>1?"s":""):""}</div></div>
-      <span class="pill p-${l.status}">${l.status}${(l.status==='sent'&&l.next_followup_at&&NOW&&Date.parse(l.next_followup_at)<=Date.parse(NOW))?' ⏰':''}</span>
-    </div>
+  const mineCard=l.assigned_to===me;
+  const otherCard=l.assigned_to&&l.assigned_to!==me;
+  return `<div class="card" data-id="${l.id}">
+    <div class="top"><div><div class="name">${esc(l.name)}</div><div class="meta">${esc(l.category||"")}${l.area?" · "+esc(l.area):""}</div></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">${l.assigned_to?`<span class="owner">👤 ${esc(l.assigned_to)}</span>`:""}<span class="pill p-${l.status}">${l.status}</span></div></div>
+    ${l.summary?`<div class="summary">${esc(l.summary)}</div>`:""}
     <div class="row">
       ${l.phone?`<a class="chip gold" href="tel:${tel}">📞 ${esc(l.phone)}</a><span class="chip" data-copy="${esc(l.phone)}">Copy #</span>`:""}
-      ${l.email?`<a class="chip" href="mailto:${esc(l.email)}">✉ ${esc(l.email)}</a>`:""}
-      ${l.sample_url?`<a class="chip" href="${esc(l.sample_url)}" target="_blank">🔗 Open sample</a>`:""}
       ${l.maps_url?`<a class="chip" href="${esc(l.maps_url)}" target="_blank">🗺 Maps</a>`:""}
+      ${l.email?`<a class="chip" href="mailto:${esc(l.email)}">✉ Email</a>`:""}
+      ${l.sample_url?`<a class="chip" href="${esc(l.sample_url)}" target="_blank">🔗 Sample</a>`:""}
     </div>
-    ${l.summary?`<div class="muted" style="margin-top:8px">${esc(l.summary)}</div>`:""}
-    ${l.pitch?`<div class="msg">${esc(l.pitch)}</div><div class="row"><span class="chip gold" data-copy="${esc(l.pitch)}">Copy call script</span></div>`:""}
-    ${l.message?`<div class="msg">${esc(l.message)}</div><div class="row"><span class="chip gold" data-copy="${esc(l.message)}">Copy message</span></div>`:""}
-    <div class="acts">
-      ${["ready","contacted"].includes(l.status)?`<button class="btn sent" data-act="sent" data-id="${l.id}">Mark sent ✓</button>`:""}
-      ${["sent","contacted","ready"].includes(l.status)?`<button class="btn" data-act="replied" data-id="${l.id}" style="background:#0a2f3a;color:var(--blue)">Replied</button>`:""}
-      ${l.status!=="won"&&l.status!=="quoted"?`<button class="btn" data-act="quoted" data-id="${l.id}" style="background:#2a2410;color:var(--gold)">Quoted</button>`:""}
-      <button class="btn won" data-act="won" data-id="${l.id}">Won 💰</button>
-      <button class="btn skip" data-act="dead" data-id="${l.id}">Skip</button>
-    </div>
+    ${l.pitch?`<div class="script">${esc(l.pitch)}</div><div class="row"><span class="chip gold" data-copy="${esc(l.pitch)}">Copy script</span></div>`:""}
+    ${l.notes?`<div class="notes">${esc(l.notes)}</div>`:""}
+    ${otherCard?`<div class="meta" style="margin-top:10px">🔒 Picked up by ${esc(l.assigned_to)}</div>`:""}
+    ${(!l.assigned_to)?`<div class="acts"><button class="btn pick" data-act="claim">✋ Pick up this lead</button></div>`:""}
+    ${mineCard?`<textarea placeholder="Call notes — what did they say?"></textarea>
+      <div class="acts">
+        <button class="btn note" data-act="note">Save note</button>
+        <button class="btn q" data-act="quoted">Interested / Quoted</button>
+        <button class="btn cb" data-act="callback">Call back</button>
+        <button class="btn won" data-act="won">Won 💰</button>
+        <button class="btn no" data-act="dead">Not interested</button>
+        <button class="btn rel" data-act="release">Release</button>
+      </div>`:""}
   </div>`;
 }
-async function mark(id,status){
-  try{
-    const r=await fetch(SB+"/leads?k="+encodeURIComponent(k),{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({id,status})}).then(x=>x.json());
-    if(!r.ok){toast(r.error||"Failed");return;}
-    const l=all.find(x=>x.id===id); if(l)l.status=status;
-    toast(status==="won"?"Nice — marked Won 💰":status==="sent"?"Marked sent":"Skipped");
-    render();
-  }catch(e){toast(e.message);}
+function wire(){
+  $("#list").querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>{navigator.clipboard.writeText(b.dataset.copy);toast("Copied");});
+  $("#list").querySelectorAll("[data-act]").forEach(b=>b.onclick=()=>{
+    const card=b.closest(".card"), id=card.dataset.id, act=b.dataset.act;
+    if(act==="note"){const ta=card.querySelector("textarea");const note=ta.value.trim();if(!note){toast("Write a note first",1);return;}act2(id,{note});ta.value="";return;}
+    if(act==="claim")return act2(id,{claim:true});
+    if(act==="release")return act2(id,{release:true});
+    const ta=card.querySelector("textarea");const note=ta&&ta.value.trim();
+    act2(id,note?{status:act,note}:{status:act});
+  });
 }
-load();
+async function act2(id,body){
+  try{
+    const r=await fetch(FN+"/leads?k="+encodeURIComponent(K),{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({id,agent:me,...body})}).then(x=>x.json());
+    if(!r.ok){toast(r.error||"Failed",1);await load();return;}
+    toast(body.claim?"Picked up — it's yours":body.status==="won"?"Won! 💰":body.status?"Updated":body.release?"Released":"Saved");
+    await load();
+  }catch(e){toast(e.message,1);}
+}
+if(me){shell();load();setInterval(()=>{if(me)load();},30000);}else{gate();}
 </script>
 </body>
 </html>
