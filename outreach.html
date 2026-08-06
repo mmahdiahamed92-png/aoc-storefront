@@ -46,7 +46,7 @@ textarea{width:100%;margin-top:9px;background:#0e111a;border:1px solid var(--lin
 <script>
 const FN="https://fnnecltfowhcocitarln.supabase.co/functions/v1";
 const K=new URLSearchParams(location.search).get("k")||"589dcff765572fd7cbda651202887935";
-let all=[], NOW=null, tab="available", me=localStorage.getItem("aoc_agent")||"";
+let all=[], NOW=null, tab="available", svc="website", me=localStorage.getItem("aoc_agent")||"";
 const $=s=>document.querySelector(s);
 function esc(s){return String(s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
 function toast(m,bad){const t=$("#toast");t.textContent=m;t.className="toast show"+(bad?" bad":"");setTimeout(()=>t.className="toast",1700);}
@@ -64,6 +64,7 @@ window.changeMe=function(){localStorage.removeItem("aoc_agent");me="";gate();};
 function shell(){
   $("#app").innerHTML=`<div class="wrap">
     <header><h1>Lead <b>Center</b></h1><div class="me">You: <b>${esc(me)}</b><a onclick="changeMe()">change</a></div></header>
+    <div class="tabs" id="svc"></div>
     <div class="tabs" id="tabs"></div><div id="list"></div></div>`;
 }
 async function load(){
@@ -74,12 +75,16 @@ async function load(){
   }catch(e){if($("#list"))$("#list").innerHTML='<div class="err">'+esc(e.message)+'</div>';}
 }
 function buckets(){
-  const avail=all.filter(l=>!l.assigned_to&&["ready","contacted"].includes(l.status));
-  const mine=all.filter(l=>l.assigned_to===me&&!["won","dead"].includes(l.status));
-  const won=all.filter(l=>l.status==="won");
+  const A=all.filter(l=>(l.service||"website")===svc);
+  const avail=A.filter(l=>!l.assigned_to&&["ready","contacted"].includes(l.status));
+  const mine=A.filter(l=>l.assigned_to===me&&!["won","dead"].includes(l.status));
+  const won=A.filter(l=>l.status==="won");
   return {avail,mine,won};
 }
 function render(){
+  const svcs=[["website","🌐 Websites"],["travel","✈️ Travel"]];
+  $("#svc").innerHTML=svcs.map(([id,l])=>`<div class="tab ${svc===id?'on':''}" data-s="${id}">${l}</div>`).join("");
+  $("#svc").querySelectorAll("[data-s]").forEach(t=>t.onclick=()=>{svc=t.dataset.s;tab="available";render();});
   const b=buckets();
   const defs=[["available","Available",b.avail.length],["mine","My leads",b.mine.length],["won","Won 💰",b.won.length]];
   $("#tabs").innerHTML=defs.map(([id,l,n])=>`<div class="tab ${tab===id?'on':''}" data-t="${id}">${l} (${n})</div>`).join("");
